@@ -1,5 +1,4 @@
-module Api::V1
-  class UsersController < ApplicationController
+class Admin::V1::UsersController < ApplicationController
     before_action :set_user, only: [:show, :update, :destroy]
 
     # GET /users
@@ -50,4 +49,3 @@ module Api::V1
         params.require(:user).permit(:email, :password_digest)
       end
   end
-end
