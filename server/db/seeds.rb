@@ -29,4 +29,11 @@ student1 = User.create!({
   teacher: false,
 })
 
+problem1 = Problem.create!({
+  statement: 'A basic problem.',
+  description: 'not too difficult',
+  solution: '0',
+  course_id: course1.id 
+})
+
 student1.courses << Course.find(course1.id)
