@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios';
-import Courses from './Pages/Problems/Courses.jsx'
+import Courses from './Pages/Courses/Courses.jsx'
 import { Route, Link } from 'react-router-dom';
 
 const Home = () => (
