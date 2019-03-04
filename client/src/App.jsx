@@ -3,6 +3,15 @@ import ReactDOM from 'react-dom';
 import ReactBlocklyComponent from './index';
 import ConfigFiles from './initContent/content';
 import parseWorkspaceXml from './BlocklyHelper.jsx';
+import axios from 'axios';
+import Courses from './Pages/Problems/Courses.jsx'
+import { Route, Link } from 'react-router-dom';
+
+const Home = () => (
+  <div>
+    <h2> Home </h2>
+  </div>
+);
 
 class TestEditor extends React.Component {
   constructor(props) {
@@ -40,12 +49,36 @@ class TestEditor extends React.Component {
   //   }, 2000);
   // }
 
-  workspaceDidChange = (workspace) => {
-    const newXml = Blockly.Xml.domToText(Blockly.Xml.workspaceToDom(workspace));
-    document.getElementById('generated-xml').innerText = newXml;
+// BELOW FUNCTION CALL UPDATES WORKSPACE (FOR FUTURE USE)
 
-    const code = Blockly.JavaScript.workspaceToCode(workspace);
-    document.getElementById('code').value = code;
+  // workspaceDidChange = (workspace) => {
+  //   const newXml = Blockly.Xml.domToText(Blockly.Xml.workspaceToDom(workspace));
+  //   document.getElementById('generated-xml').innerText = newXml;
+
+  //   const code = Blockly.JavaScript.workspaceToCode(workspace);
+  //   document.getElementById('code').value = code;
+  // componentDidMount() {
+  //   axios.get('http://localhost:3001/admin/v1/users.json')
+  //   .then(response => {
+  //     this.setState({
+  //       users: response.data,
+  //     })
+  //   })
+  //   .catch(error => console.log(error))
+  // } 
+
+  render() {
+    return (
+      <div>
+        <ul>
+          <li><Link to="/">Home</Link></li>
+          <li><Link to="/courses">Courses</Link></li>
+        </ul>
+        
+        <Route path="/" exact component={Home}/>
+        <Route path="/courses" component={Courses}/>
+      </div>
+    );
   }
 
   render = () => (
