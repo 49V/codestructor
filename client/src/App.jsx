@@ -1,5 +1,13 @@
 import React, {Component} from 'react';
 import axios from 'axios';
+import Courses from './Pages/Problems/Courses.jsx'
+import { Route, Link } from 'react-router-dom';
+
+const Home = () => (
+  <div>
+    <h2> Home </h2>
+  </div>
+);
 
 class App extends Component {
   constructor(props) {
@@ -17,13 +25,20 @@ class App extends Component {
       })
     })
     .catch(error => console.log(error))
-  }
+  } 
 
   render() {
     return (
-      <div className="lists-container">
+      <div>
+        <ul>
+          <li><Link to="/">Home</Link></li>
+          <li><Link to="/courses">Courses</Link></li>
+        </ul>
+        
+        <Route path="/" exact component={Home}/>
+        <Route path="/courses" component={Courses}/>
       </div>
-);
+    );
   }
 }
 export default App;
