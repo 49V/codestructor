@@ -43,6 +43,7 @@
     "css-loader": "0.26.1",
     "eslint": "3.15.0",
     "eslint-plugin-react": "6.9.0",
+    "expose-loader": "^0.7.3",
     "sass-loader": "6.0.0",
     "sockjs-client": "^1.1.2",
     "style-loader": "0.13.1",
@@ -50,9 +51,13 @@
     "webpack-dev-server": "2.3.0"
   },
   "dependencies": {
-    "react-scripts": "1.0.17",
     "axios": "^0.17.1",
-    "react": "15.4.2",
-    "react-dom": "15.4.2"
+    "immutable": "^3.8.2",
+    "node-sass": "^4.11.0",
+    "prop-types": "^15.6.0",
+    "react": "^16.5.2",
+    "react-dom": "^16.5.2",
+    "react-immutable-proptypes": "^2.1.0",
+    "react-scripts": "1.0.17"
   }
 }

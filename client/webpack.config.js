@@ -8,14 +8,16 @@ module.exports = {
     './src/index.jsx'
   ],
   output: {
-    path: path.join(__dirname, 'dist'),
-    filename: 'bundle.js',
-    publicPath: '/build/'
+    path: path.resolve(__dirname, 'dist'),
+    filename: "react-blockly-component.js",
+    libraryTarget: "var",
+    library: "ReactBlocklyComponent"
   },
   module: {
     rules: [
       {
         test: /\.jsx?$/,
+        exclude: /(node_modules|bower_components)/,
         loader: 'babel-loader',
         include: path.join(__dirname, 'src')
       },
@@ -28,5 +30,18 @@ module.exports = {
         ]
       }
     ]
+  },
+  plugins: [
+    new webpack.ProvidePlugin({
+      React: 'react',
+      ReactDOM: 'react-dom',
+    }),
+  ],
+  resolve: {
+    extensions: ['.js', '.jsx']
+  },
+  devServer: {
+    contentBase: './public',
+    filename: 'react-blockly-component.js'
   }
 };

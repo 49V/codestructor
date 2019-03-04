@@ -1,3 +1,5 @@
+/* eslint-disable import/no-extraneous-dependencies */
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import ReactBlocklyComponent from './index';
@@ -69,17 +71,3 @@ window.addEventListener('load', () => {
   const editor = React.createElement(TestEditor);
   ReactDOM.render(editor, document.getElementById('blockly'));
 });
-
-
-// import React, {Component} from 'react';
-// import axios from 'axios';
-
-  // componentDidMount() {
-  //   axios.get('http://localhost:3001/admin/v1/users.json')
-  //   .then(response => {
-  //     this.setState({
-  //       users: response.data,
-  //     })
-  //   })
-  //   .catch(error => console.log(error))
-  // }
