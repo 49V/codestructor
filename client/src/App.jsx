@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import ReactBlocklyComponent from './index';
 import ConfigFiles from './initContent/content';
-import parseWorkspaceXml from './BlocklyHelper';
+import parseWorkspaceXml from './BlocklyHelper.jsx';
 
 class TestEditor extends React.Component {
   constructor(props) {
@@ -12,32 +12,33 @@ class TestEditor extends React.Component {
     };
   }
 
-  componentDidMount = () => {
-    window.setTimeout(() => {
-      this.setState({
-        toolboxCategories: this.state.toolboxCategories.concat([
-          {
-            name: 'Text2',
-            blocks: [
-              { type: 'text' },
-              {
-                type: 'text_print',
-                values: {
-                  TEXT: {
-                    type: 'text',
-                    shadow: true,
-                    fields: {
-                      TEXT: 'abc',
-                    },
-                  },
-                },
-              },
-            ],
-          },
-        ]),
-      });
-    }, 2000);
-  }
+// Below componentDidMount function renders Blockly (complete editor space) For future use. 
+  // componentDidMount = () => {
+  //   window.setTimeout(() => {
+  //     this.setState({
+  //       toolboxCategories: this.state.toolboxCategories.concat([
+  //         {
+  //           name: 'Text2',
+  //           blocks: [
+  //             { type: 'text' },
+  //             {
+  //               type: 'text_print',
+  //               values: {
+  //                 TEXT: {
+  //                   type: 'text',
+  //                   shadow: true,
+  //                   fields: {
+  //                     TEXT: 'abc',
+  //                   },
+  //                 },
+  //               },
+  //             },
+  //           ],
+  //         },
+  //       ]),
+  //     });
+  //   }, 2000);
+  // }
 
   workspaceDidChange = (workspace) => {
     const newXml = Blockly.Xml.domToText(Blockly.Xml.workspaceToDom(workspace));
