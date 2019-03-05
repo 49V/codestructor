@@ -11,6 +11,8 @@ import {
   Switch,
   Redirect
 } from 'react-router-dom'
+import Demo from './Pages/Demo/Demo.jsx'
+import { Route, Link } from 'react-router-dom';
 
 const Home = () => (
   <div>
@@ -43,6 +45,7 @@ class App extends Component {
           <li><Link to="/">Home</Link></li>
           <li><Link to="/courses">Courses</Link></li>
           <li><Link to="/courses/meow">Courses Meow</Link></li>
+          <li><Link to="/demo">Blockly Demo</Link></li>
         </ul>
         
         <Switch>
@@ -50,8 +53,10 @@ class App extends Component {
           <Route path="/courses" exact component={CoursesIndex}/>
           <Route path="/courses/meow" render={() => {return <h1>meow</h1>}} />
           <Route path="/courses/:id" component={CoursesShow} />
+          <Route path="/demo" component={Demo}/>
           <Route render={() => {return <h1>You just 404'd</h1>}} />
         </Switch>
+
       </div>
     );
   }

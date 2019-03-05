@@ -51,9 +51,19 @@
   },
   "dependencies": {
     "axios": "^0.17.1",
+    "immutable": "^3.8.2",
+    "node-blockly": "^1.0.35",
     "node-sass": "^4.11.0",
+<<<<<<< HEAD
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
+=======
+    "prop-types": "^15.6.0",
+    "react": "^16.5.2",
+    "react-blockly-drawer": "^1.6.6",
+    "react-dom": "^16.5.2",
+    "react-immutable-proptypes": "^2.1.0",
+>>>>>>> 8d4c530f488e13de03eb3618fed8289ef2dee274
     "react-router-dom": "^4.3.1",
     "react-scripts": "1.0.17"
   }
