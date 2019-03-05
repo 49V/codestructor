@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
 import axios from 'axios';
+import { Route, Link, Switch } from 'react-router-dom';
+import CoursesShow from './CoursesShow.jsx'
 
-class Courses extends Component {
+class CoursesIndex extends Component {
 
   constructor(props) {
     super(props);
@@ -24,7 +26,14 @@ class Courses extends Component {
     let courses = this.state.courses.map((course, index) => {
       return(
         <div key={index}>
-          {course.name} : {course.id}
+          
+          <ul>
+            <li>
+            <Link to={`${this.props.match.url}/${course.id}`}>
+            {course.name} : {course.id}
+            </Link>
+            </li>
+          </ul>
         </div>
       );
     }); 
@@ -37,4 +46,4 @@ class Courses extends Component {
   }
 }
 
-export default Courses
+export default CoursesIndex
