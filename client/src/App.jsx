@@ -12,7 +12,6 @@ import {
   Redirect
 } from 'react-router-dom'
 import Demo from './Pages/Demo/Demo.jsx'
-import { Route, Link } from 'react-router-dom';
 
 const Home = () => (
   <div>
