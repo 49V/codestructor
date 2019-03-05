@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import Courses from './Pages/Problems/Courses.jsx'
+import Demo from './Pages/Demo/Demo.jsx'
 import { Route, Link } from 'react-router-dom';
 
 const Home = () => (
@@ -33,10 +34,12 @@ class App extends Component {
         <ul>
           <li><Link to="/">Home</Link></li>
           <li><Link to="/courses">Courses</Link></li>
+          <li><Link to="/demo">Blockly Demo</Link></li>
         </ul>
         
         <Route path="/" exact component={Home}/>
         <Route path="/courses" component={Courses}/>
+        <Route path="/demo" component={Demo}/>
       </div>
     );
   }
