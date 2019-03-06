@@ -16,6 +16,7 @@ class CoursesIndex extends Component {
     };
   }
 
+  // TODO: NEED TO RESTRICT THIS AXIOS REQUEST BASED UPON TEACHER ID
   componentDidMount() {
     axios.get('http://localhost:3001/admin/v1/courses.json')
     .then(response => {
@@ -35,12 +36,12 @@ class CoursesIndex extends Component {
             <Link to={`${this.props.match.url}/${course.id}`}>
             {course.name} : {course.id}
             </Link>
-            {/* CREATE COMPONENT */}
-            <Create />
             {/* DELETE COMPONENT */}
             <Delete />
             {/* EDIT COMPONENT */}
-            <Update />
+            <Link to={`${this.props.match.url}/${course.id}/edit`} >
+              Edit
+            </Link>
             </li>
           </ul>
         </div>
@@ -50,6 +51,10 @@ class CoursesIndex extends Component {
     return (
       <div className="courses">
         <h1>{courses}</h1>
+        {/* CREATE COMPONENT */}
+        <Link to={`${this.props.match.url}/new`} >
+          Create a course
+        </Link>
       </div>
     );
   }

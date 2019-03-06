@@ -3,9 +3,7 @@ import axios from 'axios';
 
 class CoursesCreate extends Component {
 
-  componentDidMount() {
-    // Insert Axios Request
-  }
+  //TODO: INSERT AXIOS REQUEST IN ORDER TO POST NEW ENTRY
 
   render() {
     return(

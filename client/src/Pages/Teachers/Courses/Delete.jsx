@@ -3,9 +3,7 @@ import axios from 'axios';
 
 class CoursesDelete extends Component {
 
-  componentDidMount() {
-    // Insert Axios Request
-  }
+  //TODO: INSERT AXIOS REQUEST IN ORDER TO DELETE A ENTRY
 
   render() {
     return(
