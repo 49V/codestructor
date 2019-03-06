@@ -26,7 +26,7 @@ const helloWorld =  {
   },
   generator: (block) => {
     const message = `'${block.getFieldValue('NAME')}'` || '\'\'';
-    const code = `console.log('Hello ${message}')`;
+    const code = `console.log("Hello, ${message}");`;
     return [code, Blockly.JavaScript.ORDER_MEMBER];
   },
 };
@@ -39,7 +39,10 @@ class Demo extends Component {
       <BlocklyDrawer
         tools={[helloWorld]}
         onChange={(code, workspace) => {
-          console.log(code, workspace);
+          console.log(code);
+          if (eval(code) === 1) {
+            alert("Got it!");
+          }
         }}
         appearance={
           {
@@ -51,11 +54,13 @@ class Demo extends Component {
           }
         }
       >
+
         <Category name="Variables" custom="VARIABLE" />
         <Category name="Values">
           <Block type="math_number" />
           <Block type="text" />
         </Category>
+ 
       </BlocklyDrawer>
     );
   }
