@@ -47,24 +47,14 @@ class App extends Component {
       <div>
         <ul>
           <li><Link to="/">Home</Link></li>
-<<<<<<< HEAD
-          <li><Link to="/courses">Courses</Link></li>
-          <li><Link to="/courses/meow">Courses Meow</Link></li>
           <li><Link to="/demo">Blockly Demo</Link></li>
-=======
           <li><Link to="/teachers/courses">Teacher Courses</Link></li>
->>>>>>> 0d1ee6d513f668707eda3631384d88e0c8f8df0d
         </ul>
         
         {/* All of our routes are defined here */}
         <Switch>
           <Route path="/" exact component={Home}/>
-<<<<<<< HEAD
-          <Route path="/courses" exact component={CoursesIndex}/>
-          <Route path="/courses/meow" render={() => {return <h1>meow</h1>}} />
-          <Route path="/courses/:id" component={CoursesShow} />
           <Route path="/demo" component={Demo}/>
-=======
           <Route path="/teachers/courses" exact component={TeachersCoursesIndex} />
           <Route path="/teachers/courses/new" exact component={TeachersCoursesNew} />
           <Route path="/teachers/courses/:id" exact component={TeachersCoursesShow} />
@@ -72,7 +62,6 @@ class App extends Component {
           <Route path="/teachers/courses/:id/problems/new" exact component={TeachersProblemsNew} />
           <Route path="/teachers/courses/:id/problems/:id" exact component={TeachersProblemsShow} />
           <Route path="/teachers/courses/:id/problems/:id/edit" exact component={TeachersProblemsUpdate} />
->>>>>>> 0d1ee6d513f668707eda3631384d88e0c8f8df0d
           <Route render={() => {return <h1>You just 404'd</h1>}} />
         </Switch>
 
