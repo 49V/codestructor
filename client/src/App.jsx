@@ -1,15 +1,14 @@
 import React, {Component} from 'react';
 import axios from 'axios';
-import CoursesIndex from './Pages/Courses/CoursesIndex.jsx'
-import CoursesShow from  './Pages/Courses/CoursesShow.jsx'
+
+import TeachersCoursesIndex   from  './Pages/Teachers/Courses/Index.jsx'
+import TeachersCoursesShow    from  './Pages/Teachers/Courses/Show.jsx'
 
 // import route Components here
 import {
-  BrowserRouter as Router,
   Route,
   Link,
   Switch,
-  Redirect
 } from 'react-router-dom'
 
 const Home = () => (
@@ -47,9 +46,8 @@ class App extends Component {
         
         <Switch>
           <Route path="/" exact component={Home}/>
-          <Route path="/courses" exact component={CoursesIndex}/>
-          <Route path="/courses/meow" render={() => {return <h1>meow</h1>}} />
-          <Route path="/courses/:id" component={CoursesShow} />
+          <Route path="/courses" exact component={TeachersCoursesIndex}/>
+          <Route path="/courses/:id" component={TeachersCoursesShow} />
           <Route render={() => {return <h1>You just 404'd</h1>}} />
         </Switch>
       </div>
