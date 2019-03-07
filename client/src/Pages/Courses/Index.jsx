@@ -27,6 +27,12 @@ class CoursesIndex extends Component {
     .catch(error => console.log(error))
   }
 
+  addNewCourse = (newCourse) => {
+    this.setState({
+      courses: [...this.state.courses, newCourse]
+    });
+  } 
+
   render() {
     let courses = this.state.courses.map((course, index) => {
       return(
@@ -52,9 +58,7 @@ class CoursesIndex extends Component {
       <div className="courses">
         <h1>{courses}</h1>
         {/* CREATE COMPONENT */}
-        <Link to={`${this.props.match.url}/new`} >
-          Create a course
-        </Link>
+          <Create addNewCourse={this.addNewCourse} />
       </div>
     );
   }
