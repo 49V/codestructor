@@ -3,7 +3,6 @@ class Admin::V1::CoursesController < ApplicationController
 
   # GET /courses
   def index
-
     if @current_user.teacher
       courses = @current_user.created_courses
     else
@@ -20,12 +19,14 @@ class Admin::V1::CoursesController < ApplicationController
 
   # POST /courses
   def create
-    @course = Course.new(course_params)
-
-    if @course.save
-      render json: @course, status: :created, location: @course
-    else
-      render json: @course.errors, status: :unprocessable_entity
+    if @current_user.teacher
+      @course = Course.new(course_params)
+      @course.teacher_id = @current_user.id
+      if @course.save
+        render json: @course
+      else
+        render json: @course.errors
+      end
     end
   end
 

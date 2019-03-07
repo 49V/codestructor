@@ -12,7 +12,6 @@ class CoursesCreate extends Component {
     let newCourse = {
       name: name.value,
       description: description.value,
-      teacher_id: 1
     };
 
     const addNewCourse = this.props.addNewCourse;
@@ -20,7 +19,8 @@ class CoursesCreate extends Component {
     axios.post('http://localhost:3001/admin/v1/courses', newCourse)
     .then(function (response) {
       newCourse = response.data;
-      addNewCourse(newCourse)
+      console.log(newCourse);
+      addNewCourse(newCourse);
     })
     .catch(function (error) {
       console.log(error);
