@@ -32,7 +32,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     const { cookies } = props;
-    cookies.set('id', 4);
+    cookies.set('id', 3);
     this.state = {
       user: {}
     };
@@ -54,23 +54,24 @@ class App extends Component {
         <ul>
           <li><Link to="/">Home</Link></li>
           <li><Link to="/courses">Courses</Link></li>
-          <li><button onClick={ () => { 
-            this.props.cookies.set('id', (this.props.cookies.get('id') === 3) ? 4 : 3 )
+        </ul>
+
+        <button className='devHelper' onClick={ () => { 
+            this.props.cookies.set('id', this.state.user.id === 3 ? 4 : 3)
             this.componentDidMount()
             }
-          }> Teacher </button></li>
-        </ul>
+          }> Logged in as: {(this.state.user.teacher ? 'Teacher' : 'Student')} </button>
         
         {/* All of our routes are defined here */}
         <Switch>
           <Route path="/" exact component={Home}/>
-          <Route path="/courses" exact component={CoursesIndex} />
-          <Route path="/courses/new" render={ (props) => <CoursesNew {...props} userID={[this.state.user.id]} teacher={this.state.user.teacher} /> } />
-          <Route path="/courses/:id" render={ (props) => <CoursesShow {...props} userID={[this.state.user.id]} teacher={this.state.user.teacher} /> } /> 
-          <Route path="/courses/:id/edit" exact component={CoursesUpdate} />
-          <Route path="/courses/:id/problems/new" exact component={ProblemsNew} />
-          <Route path="/courses/:id/problems/:id" exact component={ProblemsShow} />
-          <Route path="/courses/:id/problems/:id/edit" exact component={ProblemsUpdate} />
+          <Route path="/courses" exact render={(props) => <CoursesIndex {...props} teacher={this.state.user.teacher} /> } />
+          <Route path="/courses/new" exact render={ (props) => <CoursesNew {...props} teacher={this.state.user.teacher} /> } />
+          <Route path="/courses/:id" exact render={ (props) => <CoursesShow {...props} teacher={this.state.user.teacher} /> } /> 
+          <Route path="/courses/:id/edit" exact render={ (props) => <CoursesUpdate {...props} teacher={this.state.user.teacher} /> } />
+          <Route path="/courses/:id/problems/new" exact render={ (props) => <ProblemsNew {...props} teacher={this.state.user.teacher} /> } /> 
+          <Route path="/courses/:id/problems/:id" exact render={ (props) => <ProblemsShow {...props} teacher={this.state.user.teacher} /> } />
+          <Route path="/courses/:id/problems/:id/edit" exact render={ (props) => <ProblemsUpdate {...props} teacher={this.state.user.teacher} /> } />
           <Route render={() => {return <h1>You just 404'd</h1>}} />
         </Switch>
       </div>

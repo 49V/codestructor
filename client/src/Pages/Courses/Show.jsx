@@ -1,8 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import { instanceOf } from 'prop-types';
-
 
 import CoursesDelete  from  './Delete.jsx';
 import CoursesUpdate  from  './Update.jsx';
@@ -40,10 +38,17 @@ class CoursesShow extends Component {
               <Link to={`${this.props.match.url}/problems/${problem.id}`} >
                   {problem.id} : {problem.statement}
               </Link>
-              { this.props.teacher && <ProblemsDelete /> }
-              { this.props.teacher && <Link to={`${this.props.match.url}/problems/${problem.id}/edit`} >
-                Edit
-              </Link> }
+              { this.props.teacher && 
+              <ul>
+              {/* Teacher Only Links */}
+                <li><ProblemsDelete teacher={this.props.teacher}/></li>
+                <li>
+                  <Link to={`${this.props.match.url}/problems/${problem.id}/edit`} >
+                    Edit
+                  </Link>
+                </li>
+              </ul>
+              }
             </li>
           </ul>
         </div>
@@ -55,15 +60,16 @@ class CoursesShow extends Component {
         Course ID: {this.props.match.params.id}
         <br/>
         User: {this.props.userID}
-        {this.props.teacher && 'Teacher'}
         {problems}
         { this.props.teacher &&
-          <Link to={`${this.props.match.url}/problems/new`} >
-          Create a problem
-          </Link>
+          <div className='teacherLinks'>
+            <Link to={`${this.props.match.url}/problems/new`} >
+              Create a problem
+            </Link>
+            <CoursesUpdate teacher={this.props.teacher}/>
+            <CoursesDelete teacher={this.props.teacher}/>
+          </div>
         }
-        { this.props.teacher && <CoursesUpdate /> }
-        { this.props.teacher &&  <CoursesDelete /> }
       </div>
     );
 

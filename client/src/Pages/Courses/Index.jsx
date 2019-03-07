@@ -34,17 +34,18 @@ class CoursesIndex extends Component {
         <div key={index}>
           <ul>
             <li>
-            <Link to={`${this.props.match.url}/${course.id}`}>
-            {course.name} : {course.id}
-            </Link>
-            {/* DELETE COMPONENT */}
-            <Delete />
-            {/* EDIT COMPONENT */}
-            <Link to={`${this.props.match.url}/${course.id}/edit`} >
-              Edit
-            </Link>
+              <Link to={`${this.props.match.url}/${course.id}`}>
+                {course.name} : {course.id}
+              </Link>
             </li>
-            {/* <li>Logged in as {this.state}</li> */}
+            { this.props.teacher && <li>
+              DELETE COMPONENT
+              <Delete teacher={this.props.teacher}/>
+              EDIT COMPONENT
+              <Link to={`${this.props.match.url}/${course.id}/edit`} >
+                Edit
+              </Link>
+            </li> }
           </ul>
         </div>
       );
@@ -53,10 +54,10 @@ class CoursesIndex extends Component {
     return (
       <div className="courses">
         <h1>{courses}</h1>
-        {/* CREATE COMPONENT */}
+        { this.props.teacher && 
         <Link to={`${this.props.match.url}/new`} >
-          Create a course
-        </Link>
+          Create a course CREATE COMPONENT
+        </Link> }        
       </div>
     );
   }

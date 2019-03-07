@@ -7,7 +7,9 @@ class CoursesDelete extends Component {
 
   render() {
     return(
-      <h1>Teachers Courses Delete Interface</h1>
+      <div>
+      { this.props.teacher ? <h1> Teachers Courses Delete Interface </h1> : <h1> Hey! How'd you get here? This page is only for teachers. </h1> }
+    </div>
     );
   }
 }
