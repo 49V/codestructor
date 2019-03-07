@@ -55,7 +55,7 @@ class App extends Component {
           <li><Link to="/">Home</Link></li>
           <li><Link to="/courses">Courses</Link></li>
           <li><button onClick={ () => { 
-            this.props.cookies.set('id', 3)
+            this.props.cookies.set('id', (this.props.cookies.get('id') === 3) ? 4 : 3 )
             this.componentDidMount()
             }
           }> Teacher </button></li>
