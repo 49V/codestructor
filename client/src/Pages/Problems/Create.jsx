@@ -8,7 +8,7 @@ class ProblemsCreate extends Component {
   render() {
     return(
       <div>
-        Problem Create
+        { this.props.teacher ? <h1> Problem Create </h1> : <h1> Hey! How'd you get here? This page is only for teachers. </h1> }
       </div>
     );
   }

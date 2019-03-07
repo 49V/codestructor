@@ -1,4 +1,6 @@
 import React, {Component} from 'react';
+import { instanceOf } from 'prop-types';
+import { withCookies, Cookies } from 'react-cookie';
 import axios from 'axios';
 
 import CoursesNew     from  './Pages/Courses/Create.jsx'
@@ -9,13 +11,14 @@ import ProblemsNew    from  './Pages/Problems/Create.jsx';
 import ProblemsShow   from  './Pages/Problems/Show.jsx';
 import ProblemsUpdate from  './Pages/Problems/Update.jsx';
 
-axios.defaults.headers.common['UserID'] = 2 // for all requests
+const defaultUserID = 1;
+axios.defaults.headers.common['UserID'] = defaultUserID;
 
 // import route Components here
 import {
   Route,
   Link,
-  Switch,
+  Switch
 } from 'react-router-dom'
 
 const Home = () => (
@@ -25,15 +28,25 @@ const Home = () => (
 );
 
 class App extends Component {
+  static propTypes = {
+    cookies: instanceOf(Cookies).isRequired
+  };
   
   constructor(props) {
     super(props);
+    const { cookies } = props;
+    cookies.set('id', defaultUserID);
     this.state = {
-      users: []
+      user: {}
     };
   }
 
   componentDidMount() {
+    axios.get(`http://localhost:3001/admin/v1/users/${this.props.cookies.get('id')}.json`)
+    .then(response => {
+      this.setState({ user: response.data });
+    })
+    .catch(error => console.log(error))
   } 
 
   render() {
@@ -43,21 +56,29 @@ class App extends Component {
           <li><Link to="/">Home</Link></li>
           <li><Link to="/courses">Courses</Link></li>
         </ul>
+
+        <button className='devHelper' onClick={ () => { 
+            this.props.cookies.set('id', this.state.user.id === 1 ? 2 : 1);
+            axios.defaults.headers.common['UserID'] = this.props.cookies.get('id'); // for all requests
+            this.componentDidMount();
+            }
+          }> Logged in as: {(this.state.user.teacher ? 'Teacher' : 'Student')} 
+        </button>
         
         {/* All of our routes are defined here */}
         <Switch>
           <Route path="/" exact component={Home}/>
-          <Route path="/courses" exact component={CoursesIndex} />
-          <Route path="/courses/new" exact component={CoursesNew} />
-          <Route path="/courses/:id" exact component={CoursesShow} />
-          <Route path="/courses/:id/edit" exact component={CoursesUpdate} />
-          <Route path="/courses/:id/problems/new" exact component={ProblemsNew} />
-          <Route path="/courses/:id/problems/:id" exact component={ProblemsShow} />
-          <Route path="/courses/:id/problems/:id/edit" exact component={ProblemsUpdate} />
+          <Route path="/courses" exact render={(props) => <CoursesIndex {...props} teacher={this.state.user.teacher} /> } />
+          <Route path="/courses/new" exact render={ (props) => <CoursesNew {...props} teacher={this.state.user.teacher} /> } />
+          <Route path="/courses/:id" exact render={ (props) => <CoursesShow {...props} teacher={this.state.user.teacher} /> } /> 
+          <Route path="/courses/:id/edit" exact render={ (props) => <CoursesUpdate {...props} teacher={this.state.user.teacher} /> } />
+          <Route path="/courses/:id/problems/new" exact render={ (props) => <ProblemsNew {...props} teacher={this.state.user.teacher} /> } /> 
+          <Route path="/courses/:id/problems/:id" exact render={ (props) => <ProblemsShow {...props} teacher={this.state.user.teacher} /> } />
+          <Route path="/courses/:id/problems/:id/edit" exact render={ (props) => <ProblemsUpdate {...props} teacher={this.state.user.teacher} /> } />
           <Route render={() => {return <h1>You just 404'd</h1>}} />
         </Switch>
       </div>
     );
   }
 }
-export default App;
+export default withCookies(App);

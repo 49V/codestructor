@@ -2,10 +2,11 @@ import React, {Component} from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
-
+import { instanceOf } from 'prop-types';
 import Create  from  './Create.jsx'
 import Delete  from  './Delete.jsx'
 import Update  from  './Update.jsx'
+import App from '../../App.jsx';
 
 class CoursesIndex extends Component {
 
@@ -16,9 +17,8 @@ class CoursesIndex extends Component {
     };
   }
 
-  // TODO: NEED TO RESTRICT THIS AXIOS REQUEST BASED UPON TEACHER ID
   componentDidMount() {
-    axios.get('http://localhost:3001/admin/v1/courses.json')
+    axios.get('http://localhost:3001/admin/v1/courses')
     .then(response => {
       this.setState({
         courses: response.data
@@ -39,16 +39,16 @@ class CoursesIndex extends Component {
         <div key={index}>
           <ul>
             <li>
-            <Link to={`${this.props.match.url}/${course.id}`}>
-            {course.name} : {course.id}
-            </Link>
-            {/* DELETE COMPONENT */}
-            <Delete />
-            {/* EDIT COMPONENT */}
-            <Link to={`${this.props.match.url}/${course.id}/edit`} >
-              Edit
-            </Link>
+              <Link to={`${this.props.match.url}/${course.id}`}>
+                {course.name} : {course.id}
+              </Link>
             </li>
+            { this.props.teacher && <li>
+              <Delete teacher={this.props.teacher}/>
+              <Link to={`${this.props.match.url}/${course.id}/edit`} >
+                Edit
+              </Link>
+            </li> }
           </ul>
         </div>
       );
@@ -58,7 +58,10 @@ class CoursesIndex extends Component {
       <div className="courses">
         <h1>{courses}</h1>
         {/* CREATE COMPONENT */}
-          <Create addNewCourse={this.addNewCourse} />
+        { this.props.teacher && 
+        <Link to={`${this.props.match.url}/new`} > 
+          <Create addNewCourse={this.addNewCourse} teacher={this.props.teacher}/>
+        </Link> }        
       </div>
     );
   }

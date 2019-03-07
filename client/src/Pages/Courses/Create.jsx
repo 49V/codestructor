@@ -30,21 +30,24 @@ class CoursesCreate extends Component {
 
   render() {
     return(
-      <React.Fragment>
-        <h1>Create a Course</h1>
-        <form onSubmit={this.handleSubmit}>
-          Name:
-          <div>
-            <input id="courseName" name="name" type="text" placeholder="Course Name" required /> 
-          </div>  
-          Description:
-          <div>
-            <input id="courseDescription" name="description" type="text" placeholder="Course Description" />
-          </div>
-          
-          <input type="submit" value="Submit" />
-        </form>
-      </React.Fragment>
+      <div>
+        { this.props.teacher ? <h1> Teachers Courses Create Interface </h1> : <h1> Hey! How'd you get here? This page is only for teachers. </h1> }
+        <React.Fragment>
+          <h1>Create a Course</h1>
+          <form onSubmit={this.handleSubmit}>
+            Name:
+            <div>
+              <input id="courseName" name="name" type="text" placeholder="Course Name" required /> 
+            </div>  
+            Description:
+            <div>
+              <input id="courseDescription" name="description" type="text" placeholder="Course Description" />
+            </div>
+            
+            <input type="submit" value="Submit" />
+          </form>
+        </React.Fragment>
+      </div>
     );
   }
 }

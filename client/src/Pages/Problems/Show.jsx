@@ -14,7 +14,7 @@ class ProblemsShow extends Component {
     return(
       <div>
         Problem ID: {this.props.match.params.id}
-        <Delete />
+        <Delete teacher={this.props.teacher}/>
         <Link to={`${this.props.match.url}/edit`} >
           Edit
         </Link>

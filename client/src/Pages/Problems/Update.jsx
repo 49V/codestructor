@@ -8,7 +8,7 @@ class ProblemsUpdate extends Component {
   render() {
     return(
       <div>
-        Problem Update
+        { this.props.teacher ? <h1> Problem Update </h1> : <h1> Hey! How'd you get here? This page is only for teachers. </h1> }
       </div>
     )
   }

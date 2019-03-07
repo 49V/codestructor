@@ -11,7 +11,8 @@ class CoursesShow extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      problems: []
+      problems: [],
+      // user state from props >> user (from App.jsx state)
     };
   }
 
@@ -37,10 +38,17 @@ class CoursesShow extends Component {
               <Link to={`${this.props.match.url}/problems/${problem.id}`} >
                   {problem.id} : {problem.statement}
               </Link>
-              <ProblemsDelete />
-              <Link to={`${this.props.match.url}/problems/${problem.id}/edit`} >
-                Edit
-              </Link>
+              { this.props.teacher && 
+              <ul>
+              {/* Teacher Only Links */}
+                <li><ProblemsDelete teacher={this.props.teacher}/></li>
+                <li>
+                  <Link to={`${this.props.match.url}/problems/${problem.id}/edit`} >
+                    Edit
+                  </Link>
+                </li>
+              </ul>
+              }
             </li>
           </ul>
         </div>
@@ -50,12 +58,18 @@ class CoursesShow extends Component {
     return(
       <div className="problems">
         Course ID: {this.props.match.params.id}
+        <br/>
+        User: {this.props.userID}
         {problems}
-        <Link to={`${this.props.match.url}/problems/new`} >
-          Create a problem
-        </Link>
-        <CoursesUpdate />
-        <CoursesDelete />
+        { this.props.teacher &&
+          <div className='teacherLinks'>
+            <Link to={`${this.props.match.url}/problems/new`} >
+              Create a problem
+            </Link>
+            <CoursesUpdate teacher={this.props.teacher}/>
+            <CoursesDelete teacher={this.props.teacher}/>
+          </div>
+        }
       </div>
     );
 
