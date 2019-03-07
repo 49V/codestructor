@@ -18,7 +18,9 @@ Bundler.require(*Rails.groups)
 
 module Codestructor
   class Application < Rails::Application
-
+    config.middleware.use ActionDispatch::Cookies
+    config.middleware.use ActionDispatch::Session::CookieStore, key: '_codestructor_session'
+    
     # Rails 5
     config.middleware.insert_before 0, Rack::Cors do
       allow do

@@ -9,6 +9,8 @@ import ProblemsNew    from  './Pages/Problems/Create.jsx';
 import ProblemsShow   from  './Pages/Problems/Show.jsx';
 import ProblemsUpdate from  './Pages/Problems/Update.jsx';
 
+axios.defaults.headers.common['UserID'] = 1 // for all requests
+
 // import route Components here
 import {
   Route,
@@ -32,13 +34,6 @@ class App extends Component {
   }
 
   componentDidMount() {
-    axios.get('http://localhost:3001/admin/v1/users.json')
-    .then(response => {
-      this.setState({
-        users: response.data,
-      })
-    })
-    .catch(error => console.log(error))
   } 
 
   render() {

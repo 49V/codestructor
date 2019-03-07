@@ -3,9 +3,14 @@ class Admin::V1::CoursesController < ApplicationController
 
   # GET /courses
   def index
-    @courses = Course.all
 
-    render json: @courses
+    if @current_user.teacher
+      courses = @current_user.created_courses
+    else
+      courses = @current_user.courses
+    end
+
+    render json: courses
   end
 
   # GET /courses/1
