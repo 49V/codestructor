@@ -1,4 +1,6 @@
 import React, {Component} from 'react';
+import { instanceOf } from 'prop-types';
+import { withCookies, Cookies } from 'react-cookie';
 import axios from 'axios';
 
 import CoursesNew     from  './Pages/Courses/Create.jsx'
@@ -13,7 +15,7 @@ import ProblemsUpdate from  './Pages/Problems/Update.jsx';
 import {
   Route,
   Link,
-  Switch,
+  Switch
 } from 'react-router-dom'
 
 const Home = () => (
@@ -23,9 +25,14 @@ const Home = () => (
 );
 
 class App extends Component {
+  static propTypes = {
+    cookies: instanceOf(Cookies).isRequired
+  };
   
   constructor(props) {
     super(props);
+    const { cookies } = props;
+    cookies.set('id', 1);
     this.state = {
       users: []
     };
@@ -47,6 +54,7 @@ class App extends Component {
         <ul>
           <li><Link to="/">Home</Link></li>
           <li><Link to="/courses">Courses</Link></li>
+          <li><Link to="/login">Login</Link></li>
         </ul>
         
         {/* All of our routes are defined here */}
@@ -65,4 +73,4 @@ class App extends Component {
     );
   }
 }
-export default App;
+export default withCookies(App);
