@@ -1,13 +1,13 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 
-import TeachersCoursesNew     from  './Pages/Teachers/Courses/Create.jsx'
-import TeachersCoursesIndex   from  './Pages/Teachers/Courses/Index.jsx';
-import TeachersCoursesShow    from  './Pages/Teachers/Courses/Show.jsx';
-import TeachersCoursesUpdate  from  './Pages/Teachers/Courses/Update.jsx'
-import TeachersProblemsNew    from  './Pages/Teachers/Problems/Create.jsx';
-import TeachersProblemsShow   from  './Pages/Teachers/Problems/Show.jsx';
-import TeachersProblemsUpdate from  './Pages/Teachers/Problems/Update.jsx';
+import CoursesNew     from  './Pages/Courses/Create.jsx'
+import CoursesIndex   from  './Pages/Courses/Index.jsx';
+import CoursesShow    from  './Pages/Courses/Show.jsx';
+import CoursesUpdate  from  './Pages/Courses/Update.jsx'
+import ProblemsNew    from  './Pages/Problems/Create.jsx';
+import ProblemsShow   from  './Pages/Problems/Show.jsx';
+import ProblemsUpdate from  './Pages/Problems/Update.jsx';
 
 // import route Components here
 import {
@@ -46,19 +46,19 @@ class App extends Component {
       <div>
         <ul>
           <li><Link to="/">Home</Link></li>
-          <li><Link to="/teachers/courses">Teacher Courses</Link></li>
+          <li><Link to="/courses">Courses</Link></li>
         </ul>
         
         {/* All of our routes are defined here */}
         <Switch>
           <Route path="/" exact component={Home}/>
-          <Route path="/teachers/courses" exact component={TeachersCoursesIndex} />
-          <Route path="/teachers/courses/new" exact component={TeachersCoursesNew} />
-          <Route path="/teachers/courses/:id" exact component={TeachersCoursesShow} />
-          <Route path="/teachers/courses/:id/edit" exact component={TeachersCoursesUpdate} />
-          <Route path="/teachers/courses/:id/problems/new" exact component={TeachersProblemsNew} />
-          <Route path="/teachers/courses/:id/problems/:id" exact component={TeachersProblemsShow} />
-          <Route path="/teachers/courses/:id/problems/:id/edit" exact component={TeachersProblemsUpdate} />
+          <Route path="/courses" exact component={CoursesIndex} />
+          <Route path="/courses/new" exact component={CoursesNew} />
+          <Route path="/courses/:id" exact component={CoursesShow} />
+          <Route path="/courses/:id/edit" exact component={CoursesUpdate} />
+          <Route path="/courses/:id/problems/new" exact component={ProblemsNew} />
+          <Route path="/courses/:id/problems/:id" exact component={ProblemsShow} />
+          <Route path="/courses/:id/problems/:id/edit" exact component={ProblemsUpdate} />
           <Route render={() => {return <h1>You just 404'd</h1>}} />
         </Switch>
       </div>
