@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { instanceOf } from 'prop-types';
+
 
 import CoursesDelete  from  './Delete.jsx';
 import CoursesUpdate  from  './Update.jsx';
@@ -11,7 +13,8 @@ class CoursesShow extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      problems: []
+      problems: [],
+      // user state from props >> user (from App.jsx state)
     };
   }
 
@@ -37,10 +40,10 @@ class CoursesShow extends Component {
               <Link to={`${this.props.match.url}/problems/${problem.id}`} >
                   {problem.id} : {problem.statement}
               </Link>
-              <ProblemsDelete />
-              <Link to={`${this.props.match.url}/problems/${problem.id}/edit`} >
+              { this.props.teacher && <ProblemsDelete /> }
+              { this.props.teacher && <Link to={`${this.props.match.url}/problems/${problem.id}/edit`} >
                 Edit
-              </Link>
+              </Link> }
             </li>
           </ul>
         </div>
@@ -50,12 +53,17 @@ class CoursesShow extends Component {
     return(
       <div className="problems">
         Course ID: {this.props.match.params.id}
+        <br/>
+        User: {this.props.userID}
+        {this.props.teacher && 'Teacher'}
         {problems}
-        <Link to={`${this.props.match.url}/problems/new`} >
+        { this.props.teacher &&
+          <Link to={`${this.props.match.url}/problems/new`} >
           Create a problem
-        </Link>
-        <CoursesUpdate />
-        <CoursesDelete />
+          </Link>
+        }
+        { this.props.teacher && <CoursesUpdate /> }
+        { this.props.teacher &&  <CoursesDelete /> }
       </div>
     );
 

@@ -32,21 +32,21 @@ class App extends Component {
   constructor(props) {
     super(props);
     const { cookies } = props;
-    cookies.set('id', 1);
+    cookies.set('id', 4);
     this.state = {
-      users: []
+      user: {}
     };
   }
 
   componentDidMount() {
-    axios.get('http://localhost:3001/admin/v1/users.json')
+    axios.get(`http://localhost:3001/admin/v1/users/${this.props.cookies.get('id')}.json`)
     .then(response => {
-      this.setState({
-        users: response.data,
-      })
+      this.setState({ user: response.data });
     })
     .catch(error => console.log(error))
   } 
+
+
 
   render() {
     return (
@@ -54,15 +54,19 @@ class App extends Component {
         <ul>
           <li><Link to="/">Home</Link></li>
           <li><Link to="/courses">Courses</Link></li>
-          <li><Link to="/login">Login</Link></li>
+          <li><button onClick={ () => { 
+            this.props.cookies.set('id', 3)
+            this.componentDidMount()
+            }
+          }> Teacher </button></li>
         </ul>
         
         {/* All of our routes are defined here */}
         <Switch>
           <Route path="/" exact component={Home}/>
           <Route path="/courses" exact component={CoursesIndex} />
-          <Route path="/courses/new" exact component={CoursesNew} />
-          <Route path="/courses/:id" exact component={CoursesShow} />
+          <Route path="/courses/new" render={ (props) => <CoursesNew {...props} userID={[this.state.user.id]} teacher={this.state.user.teacher} /> } />
+          <Route path="/courses/:id" render={ (props) => <CoursesShow {...props} userID={[this.state.user.id]} teacher={this.state.user.teacher} /> } /> 
           <Route path="/courses/:id/edit" exact component={CoursesUpdate} />
           <Route path="/courses/:id/problems/new" exact component={ProblemsNew} />
           <Route path="/courses/:id/problems/:id" exact component={ProblemsShow} />

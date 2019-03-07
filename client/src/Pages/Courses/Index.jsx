@@ -2,10 +2,11 @@ import React, {Component} from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
-
+import { instanceOf } from 'prop-types';
 import Create  from  './Create.jsx'
 import Delete  from  './Delete.jsx'
 import Update  from  './Update.jsx'
+import App from '../../App.jsx';
 
 class CoursesIndex extends Component {
 
@@ -43,6 +44,7 @@ class CoursesIndex extends Component {
               Edit
             </Link>
             </li>
+            {/* <li>Logged in as {this.state}</li> */}
           </ul>
         </div>
       );
