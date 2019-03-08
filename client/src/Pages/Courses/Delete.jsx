@@ -3,7 +3,6 @@ import axios from 'axios';
 
 class CoursesDelete extends Component {
 
-  //TODO: INSERT AXIOS REQUEST IN ORDER TO DELETE A ENTRY
   handleClick = (event) => {
     event.preventDefault();
     const courseId = this.props.courseId;

@@ -17,8 +17,6 @@ class CoursesShow extends Component {
     };
   }
 
-  // TODO: NEED TO RESTRICT THIS REQUEST BASED UPON COURSE ID TO GET APPROPRIATE COURSE DESCRIPTION 
-  // AS WELL AS APPROPRIATE PROBLEM INFORMATION
   async componentDidMount(){
     
     const coursesRequest = await axios.get(`http://localhost:3001/admin/v1/courses/${this.props.match.params.id}`);
@@ -28,6 +26,29 @@ class CoursesShow extends Component {
       course: coursesRequest.data,
       problems: problemsRequest.data
     })
+  }
+
+  deleteProblem = (courseIndex, problemId) => {
+    const deleteIndex = this.findDeleteIndex(problemId);
+    let currentProblems = this.state.problems;
+
+    if(deleteIndex + 1) {
+      currentProblems.splice(deleteIndex, 1);
+    }
+    this.setState({
+      problems: currentProblems
+    })
+  } 
+
+  findDeleteIndex = (problemId) => {
+    let currentProblems = this.state.problems;
+    let deleteIndex = -1;
+    currentProblems.forEach((problem, index) => {
+      if(problem.id === problemId) {
+        deleteIndex = index;
+      }
+    });
+    return deleteIndex;
   }
 
   render() {
@@ -43,7 +64,7 @@ class CoursesShow extends Component {
               { this.props.teacher && 
               <ul>
               {/* Teacher Only Links */}
-                <li><ProblemsDelete teacher={this.props.teacher}/></li>
+                <li><ProblemsDelete teacher={this.props.teacher} deleteProblem={this.deleteProblem} courseId={this.props.match.params.id} problemId={problem.id}/></li>
                 <li>
                   <Link to={`${this.props.match.url}/problems/${problem.id}/edit`} >
                     Edit
@@ -83,7 +104,6 @@ class CoursesShow extends Component {
         </div>
       </React.Fragment>
     );
-
   }
 }
 
