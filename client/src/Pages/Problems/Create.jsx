@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import axios from 'axios';
+import Workspace from '../Blockly/Workspace.jsx'
 
 class ProblemsCreate extends Component {
 
@@ -8,7 +8,15 @@ class ProblemsCreate extends Component {
   render() {
     return(
       <div>
-        { this.props.teacher ? <h1> Problem Create </h1> : <h1> Hey! How'd you get here? This page is only for teachers. </h1> }
+        { this.props.teacher ? 
+        <main>
+          <Workspace id={this.props.match.params.id} />
+        </main> 
+        : 
+        <h1> 
+          Hey! How'd you get here? This page is only for teachers. 
+        </h1> }
+
       </div>
     );
   }

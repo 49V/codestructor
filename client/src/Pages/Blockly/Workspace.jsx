@@ -9,38 +9,44 @@ class Workspace extends Component {
     super(props);
     this.state = {
       problem: {},
-      workspaceXML: [props.workspaceXML || ''],
-      skipChange: false
+      path: props.path,
+      workspaceXML: [props.workspaceXML || '']
     }
   }
 
 
   componentDidMount() {
-    axios.get(`http://localhost:3001/admin/v1/${this.props.path}.json`)
-    .then(response => {
-      this.setState({ problem: response.data });
-    })
-    .catch(error => console.log(error))
+    if(this.state.path) {
+      axios.get(`http://localhost:3001/admin/v1/${this.props.path}.json`)
+      .then(response => {
+        this.setState({ problem: response.data });
+      })
+      .catch(error => console.log(error))
+    }
   } 
+
+  getWorkspaceCode = (code, workspace) => {
+    console.log(code)
+    if (this.props.solution && eval(code) === this.props.solution) {
+      // alert('Got it!');
+      console.log('solved');
+    }
+  }
 
 
   render() {
     return (
       <div>
-        <h3>Problem: {this.state.problem.id}</h3>
+        <h3>Problem: {this.state.problem.id || 'NEW'}</h3>
         <p>
-        {this.state.problem.description}
+        {this.state.problem.description || 'PROBLEM FORM FIELD' }
           <br/>
-        {this.state.problem.statement}
+        {this.state.problem.statement || 'PROBLEM FORM FIELD' }
         </p>
 
         <BlocklyDrawer
           workspaceXML={this.props.workspaceXML}
-          onChange={(code, workspace) => {
-            if (eval(code) === this.props.solution) {
-              alert('Got it!');
-            }
-          }}
+          onChange={this.getWorkspaceCode}
         >
 
           <Category name='Variables' custom='VARIABLE' />
