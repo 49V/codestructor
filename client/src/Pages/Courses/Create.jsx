@@ -19,7 +19,6 @@ class CoursesCreate extends Component {
     axios.post('http://localhost:3001/admin/v1/courses', newCourse)
     .then(function (response) {
       newCourse = response.data;
-      console.log(newCourse);
       addNewCourse(newCourse);
     })
     .catch(function (error) {
@@ -31,7 +30,7 @@ class CoursesCreate extends Component {
   render() {
     return(
       <div>
-        { this.props.teacher ? <h1> Teachers Courses Create Interface </h1> : <h1> Hey! How'd you get here? This page is only for teachers. </h1> }
+        {/* { this.props.teacher ? <h1> Teachers Courses Create Interface </h1> : <h1> Hey! How'd you get here? This page is only for teachers. </h1> } */}
         <React.Fragment>
           <h1>Create a Course</h1>
           <form onSubmit={this.handleSubmit}>

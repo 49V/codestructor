@@ -41,7 +41,7 @@ class Admin::V1::CoursesController < ApplicationController
 
   # DELETE /courses/1
   def destroy
-    @course.destroy
+    @course.destroy if(@current_user.teacher) 
   end
 
   private

@@ -33,6 +33,30 @@ class CoursesIndex extends Component {
     });
   } 
 
+  deleteCourse = (courseId) => {
+    const deleteIndex = this.findDeleteIndex(courseId);
+    let currentCourses = this.state.courses;
+
+    if(deleteIndex + 1) {
+      currentCourses.splice(deleteIndex, 1);
+    }
+
+    this.setState({
+      courses: currentCourses
+    })
+  }
+
+  findDeleteIndex = (courseId) => {
+    let currentCourses = this.state.courses;
+    let deleteIndex = 1;
+    currentCourses.forEach( (course, index) => {
+      if(course.id === courseId) {
+        deleteIndex = index;
+      }
+    });
+    return deleteIndex;
+  }
+
   render() {
     let courses = this.state.courses.map((course, index) => {
       return(
@@ -44,7 +68,7 @@ class CoursesIndex extends Component {
               </Link>
             </li>
             { this.props.teacher && <li>
-              <Delete teacher={this.props.teacher}/>
+              <Delete deleteCourse={this.deleteCourse} courseId={course.id} />
               <Link to={`${this.props.match.url}/${course.id}/edit`} >
                 Edit
               </Link>
@@ -59,9 +83,8 @@ class CoursesIndex extends Component {
         <h1>{courses}</h1>
         {/* CREATE COMPONENT */}
         { this.props.teacher && 
-        <Link to={`${this.props.match.url}/new`} > 
           <Create addNewCourse={this.addNewCourse} teacher={this.props.teacher}/>
-        </Link> }        
+         }        
       </div>
     );
   }

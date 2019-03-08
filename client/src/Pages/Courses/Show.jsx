@@ -19,7 +19,7 @@ class CoursesShow extends Component {
   // TODO: NEED TO RESTRICT THIS REQUEST BASED UPON COURSE ID TO GET APPROPRIATE COURSE DESCRIPTION 
   // AS WELL AS APPROPRIATE PROBLEM INFORMATION
   componentDidMount(){
-    axios.get('http://localhost:3001/admin/v1/problems.json')
+    axios.get('http://localhost:3001/admin/v1/problems')
     .then(response => {
       this.setState({
         problems: response.data

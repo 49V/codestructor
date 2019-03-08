@@ -11,8 +11,8 @@ end
 
 User.destroy_all
 
-teacher = User.create!({
-  email: 'teach@er.teacher',
+teacher1 = User.create!({
+  email: 'teach1@er.teacher',
   password: '12345',
   teacher: true
 })
@@ -20,7 +20,19 @@ teacher = User.create!({
 course1 = Course.create!({
   name: 'course1', 
   description: 'an intro course', 
-  teacher_id: teacher.id
+  teacher_id: teacher1.id
+})
+
+teacher2 = User.create!({
+  email: 'teach2@er.teacher',
+  password: '12345',
+  teacher: true
+})
+
+course2 = Course.create!({
+  name: 'course2', 
+  description: 'an intro course', 
+  teacher_id: teacher2.id
 })
 
 student1 = User.create!({
