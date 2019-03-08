@@ -28,6 +28,12 @@ class CoursesShow extends Component {
     })
   }
 
+  updateCourse = (updatedCourse) => {
+    this.setState({
+      course: updatedCourse
+    });
+  }
+
   deleteProblem = (courseIndex, problemId) => {
     const deleteIndex = this.findDeleteIndex(problemId);
     let currentProblems = this.state.problems;
@@ -97,7 +103,7 @@ class CoursesShow extends Component {
               <Link to={`${this.props.match.url}/problems/new`} >
                 Create a problem
               </Link>
-              <CoursesUpdate teacher={this.props.teacher}/>
+              <CoursesUpdate courseId={this.props.match.params.id} updateCourse={this.updateCourse}/>
               <CoursesDelete teacher={this.props.teacher}/>
             </div>
           }

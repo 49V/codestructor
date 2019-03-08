@@ -69,9 +69,6 @@ class CoursesIndex extends Component {
             </li>
             { this.props.teacher && <li>
               <Delete deleteCourse={this.deleteCourse} courseId={course.id} />
-              <Link to={`${this.props.match.url}/${course.id}/edit`} >
-                Edit
-              </Link>
             </li> }
           </ul>
         </div>

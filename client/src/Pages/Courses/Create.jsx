@@ -5,7 +5,7 @@ class CoursesCreate extends Component {
 
   //TODO: INSERT AXIOS REQUEST IN ORDER TO POST NEW ENTRY
 
-  handleSubmit = (event) =>{
+  handleSubmit = (event) => {
     event.preventDefault();
     const {name, description} = event.target.elements;
 
