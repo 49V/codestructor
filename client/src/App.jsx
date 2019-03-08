@@ -11,7 +11,7 @@ import ProblemsNew    from  './Pages/Problems/Create.jsx';
 import ProblemsShow   from  './Pages/Problems/Show.jsx';
 import ProblemsUpdate from  './Pages/Problems/Update.jsx';
 
-const defaultUserID = 1;
+const defaultUserID = 2;
 axios.defaults.headers.common['UserID'] = defaultUserID;
 
 // import route Components here
@@ -58,7 +58,7 @@ class App extends Component {
         </ul>
 
         <button className='devHelper' onClick={ () => { 
-            this.props.cookies.set('id', this.state.user.id === 1 ? 2 : 1);
+            this.props.cookies.set('id', this.state.user.id === 2 ? 3 : 2);
             axios.defaults.headers.common['UserID'] = this.props.cookies.get('id'); // for all requests
             this.componentDidMount();
             }

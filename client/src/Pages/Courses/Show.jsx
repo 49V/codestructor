@@ -52,7 +52,6 @@ class CoursesShow extends Component {
   }
 
   render() {
-
     let problems = this.state.problems.map((problem, index) => {
       return(
         <div key={index}>

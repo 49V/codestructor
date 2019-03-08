@@ -9,10 +9,9 @@ class ProblemsShow extends Component {
   //TODO: INSERT AXIOS REQUEST IN ORDER TO GET A SPECIFIC PROBLEM
 
   render() {
-
     return(
       <div>
-        <Workspace id={this.props.match.params.id}/>
+        <Workspace id={this.props.match.params.id} path={this.props.match.url} />
           { this.props.teacher && <div> <Delete teacher={this.props.teacher}/>
         <Link to={`${this.props.match.url}/edit`} >
           Edit

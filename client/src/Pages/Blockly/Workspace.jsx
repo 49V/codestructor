@@ -16,7 +16,7 @@ class Workspace extends Component {
 
 
   componentDidMount() {
-    axios.get(`http://localhost:3001/admin/v1/problems/${this.props.id}.json`)
+    axios.get(`http://localhost:3001/admin/v1/${this.props.path}.json`)
     .then(response => {
       this.setState({ problem: response.data });
     })
