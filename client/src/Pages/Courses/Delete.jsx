@@ -3,13 +3,26 @@ import axios from 'axios';
 
 class CoursesDelete extends Component {
 
-  //TODO: INSERT AXIOS REQUEST IN ORDER TO DELETE A ENTRY
+  handleClick = (event) => {
+    event.preventDefault();
+    const courseId = this.props.courseId;
+    const deleteCourse = this.props.deleteCourse;
+    
+    axios.delete(`http://localhost:3001/admin/v1/courses/${this.props.courseId}`)
+    .then(function (response) {
+      deleteCourse(courseId);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+
+  }
 
   render() {
     return(
-      <div>
-      { this.props.teacher ? <h1> Teachers Courses Delete Interface </h1> : <h1> Hey! How'd you get here? This page is only for teachers. </h1> }
-    </div>
+      <a href="" onClick={this.handleClick}>
+        Delete
+      </a>
     );
   }
 }

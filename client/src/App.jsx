@@ -11,6 +11,9 @@ import ProblemsNew    from  './Pages/Problems/Create.jsx';
 import ProblemsShow   from  './Pages/Problems/Show.jsx';
 import ProblemsUpdate from  './Pages/Problems/Update.jsx';
 
+const defaultUserID = 1;
+axios.defaults.headers.common['UserID'] = defaultUserID;
+
 // import route Components here
 import {
   Route,
@@ -32,7 +35,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     const { cookies } = props;
-    cookies.set('id', 3);
+    cookies.set('id', defaultUserID);
     this.state = {
       user: {}
     };
@@ -46,8 +49,6 @@ class App extends Component {
     .catch(error => console.log(error))
   } 
 
-
-
   render() {
     return (
       <div>
@@ -57,10 +58,12 @@ class App extends Component {
         </ul>
 
         <button className='devHelper' onClick={ () => { 
-            this.props.cookies.set('id', this.state.user.id === 3 ? 4 : 3)
-            this.componentDidMount()
+            this.props.cookies.set('id', this.state.user.id === 1 ? 2 : 1);
+            axios.defaults.headers.common['UserID'] = this.props.cookies.get('id'); // for all requests
+            this.componentDidMount();
             }
-          }> Logged in as: {(this.state.user.teacher ? 'Teacher' : 'Student')} </button>
+          }> Logged in as: {(this.state.user.teacher ? 'Teacher' : 'Student')} 
+        </button>
         
         {/* All of our routes are defined here */}
         <Switch>

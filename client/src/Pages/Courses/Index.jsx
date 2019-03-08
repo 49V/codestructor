@@ -17,15 +17,44 @@ class CoursesIndex extends Component {
     };
   }
 
-  // TODO: NEED TO RESTRICT THIS AXIOS REQUEST BASED UPON TEACHER ID
   componentDidMount() {
-    axios.get('http://localhost:3001/admin/v1/courses.json')
+    axios.get('http://localhost:3001/admin/v1/courses')
     .then(response => {
       this.setState({
         courses: response.data
       })
     })
     .catch(error => console.log(error))
+  }
+
+  addNewCourse = (newCourse) => {
+    this.setState({
+      courses: [...this.state.courses, newCourse]
+    });
+  } 
+
+  deleteCourse = (courseId) => {
+    const deleteIndex = this.findDeleteIndex(courseId);
+    let currentCourses = this.state.courses;
+
+    if(deleteIndex + 1) {
+      currentCourses.splice(deleteIndex, 1);
+    }
+
+    this.setState({
+      courses: currentCourses
+    })
+  }
+
+  findDeleteIndex = (courseId) => {
+    let currentCourses = this.state.courses;
+    let deleteIndex = 1;
+    currentCourses.forEach( (course, index) => {
+      if(course.id === courseId) {
+        deleteIndex = index;
+      }
+    });
+    return deleteIndex;
   }
 
   render() {
@@ -39,9 +68,7 @@ class CoursesIndex extends Component {
               </Link>
             </li>
             { this.props.teacher && <li>
-              DELETE COMPONENT
-              <Delete teacher={this.props.teacher}/>
-              EDIT COMPONENT
+              <Delete deleteCourse={this.deleteCourse} courseId={course.id} />
               <Link to={`${this.props.match.url}/${course.id}/edit`} >
                 Edit
               </Link>
@@ -54,10 +81,10 @@ class CoursesIndex extends Component {
     return (
       <div className="courses">
         <h1>{courses}</h1>
+        {/* CREATE COMPONENT */}
         { this.props.teacher && 
-        <Link to={`${this.props.match.url}/new`} >
-          Create a course CREATE COMPONENT
-        </Link> }        
+          <Create addNewCourse={this.addNewCourse} teacher={this.props.teacher}/>
+         }        
       </div>
     );
   }

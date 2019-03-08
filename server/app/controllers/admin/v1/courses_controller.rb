@@ -3,9 +3,13 @@ class Admin::V1::CoursesController < ApplicationController
 
   # GET /courses
   def index
-    @courses = Course.all
-
-    render json: @courses
+    if @current_user.teacher
+      courses = @current_user.created_courses
+    else
+      courses = @current_user.courses
+    end
+    
+    render json: courses
   end
 
   # GET /courses/1
@@ -15,12 +19,14 @@ class Admin::V1::CoursesController < ApplicationController
 
   # POST /courses
   def create
-    @course = Course.new(course_params)
-
-    if @course.save
-      render json: @course, status: :created, location: @course
-    else
-      render json: @course.errors, status: :unprocessable_entity
+    if @current_user.teacher
+      @course = Course.new(course_params)
+      @course.teacher_id = @current_user.id
+      if @course.save
+        render json: @course
+      else
+        render json: @course.errors
+      end
     end
   end
 
@@ -35,7 +41,7 @@ class Admin::V1::CoursesController < ApplicationController
 
   # DELETE /courses/1
   def destroy
-    @course.destroy
+    @course.destroy if(@current_user.teacher) 
   end
 
   private
@@ -46,6 +52,6 @@ class Admin::V1::CoursesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def course_params
-      params.require(:course).permit(:name, :description)
+      params.require(:course).permit(:name, :description, :teacher_id)
     end
 end

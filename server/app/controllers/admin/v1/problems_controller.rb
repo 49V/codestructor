@@ -1,19 +1,18 @@
 class Admin::V1::ProblemsController < ApplicationController
   before_action :set_problem, only: [:show, :update, :destroy]
 
-  # GET /problems
+  # GET /courses/:courses_id/problems
   def index
-    @problems = Problem.all
-
+    @problems = Problem.where(course_id: params[:course_id])
     render json: @problems
   end
 
-  # GET /problems/1
+  # GET /:courses_id/problems/1
   def show
     render json: @problem
   end
 
-  # POST /problems
+  # POST /:courses_id/problems
   def create
     @problem = Problem.new(problem_params)
 
@@ -24,7 +23,7 @@ class Admin::V1::ProblemsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /problems/1
+  # PATCH/PUT /:courses_id/problems/1
   def update
     if @problem.update(problem_params)
       render json: @problem
@@ -33,7 +32,7 @@ class Admin::V1::ProblemsController < ApplicationController
     end
   end
 
-  # DELETE /problems/1
+  # DELETE /:courses_id/problems/1
   def destroy
     @problem.destroy
   end

@@ -8,7 +8,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { HashRouter as Router } from 'react-router-dom'
 import App from './App.jsx';
+import axios from 'axios';
 import { CookiesProvider } from 'react-cookie';
+import "babel-core/register";
+import "babel-polyfill";
 
 const routing = (
   <CookiesProvider>
