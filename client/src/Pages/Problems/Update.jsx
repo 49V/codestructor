@@ -8,7 +8,7 @@ class ProblemsUpdate extends Component {
   render() {
     return(
       <div>
-        { this.props.teacher ? <main><Workspace id={this.props.match.params.id} /> </main> : <h1> Hey! How'd you get here? This page is only for teachers. </h1> }
+        { this.props.teacher ? <main><Workspace id={this.props.match.params.id} path={this.props.match.url.replace('/edit', '')} /> </main> : <h1> Hey! How'd you get here? This page is only for teachers. </h1> }
         <button>Save Changes</button>
       </div>
     )
