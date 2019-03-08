@@ -53,8 +53,10 @@
   "dependencies": {
     "axios": "^0.17.1",
     "cookie-session": "^1.3.3",
+    "node-blockly": "^1.0.35",
     "node-sass": "^4.11.0",
     "react": "^16.5.2",
+    "react-blockly-drawer": "^1.6.6",
     "react-cookie": "^3.0.8",
     "react-dom": "^16.5.2",
     "react-router-dom": "^4.3.1",
