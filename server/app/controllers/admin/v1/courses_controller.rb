@@ -8,7 +8,7 @@ class Admin::V1::CoursesController < ApplicationController
     else
       courses = @current_user.courses
     end
-
+    
     render json: courses
   end
 

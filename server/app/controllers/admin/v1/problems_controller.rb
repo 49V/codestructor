@@ -3,8 +3,7 @@ class Admin::V1::ProblemsController < ApplicationController
 
   # GET /problems
   def index
-    @problems = Problem.all
-
+    @problems = Problem.where(course_id: params[:course_id])
     render json: @problems
   end
 

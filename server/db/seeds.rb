@@ -48,4 +48,18 @@ problem1 = Problem.create!({
   course_id: course1.id 
 })
 
+problem2 = Problem.create!({
+  statement: 'A basic problem.',
+  description: 'not too difficult',
+  solution: '0',
+  course_id: course1.id 
+})
+
+problem3 = Problem.create!({
+  statement: 'A basic problem.',
+  description: 'not too difficult',
+  solution: '0',
+  course_id: course2.id 
+})
+
 student1.courses << Course.find(course1.id)

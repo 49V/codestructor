@@ -12,20 +12,22 @@ class CoursesShow extends Component {
     super(props);
     this.state = {
       problems: [],
+      course: {}
       // user state from props >> user (from App.jsx state)
     };
   }
 
   // TODO: NEED TO RESTRICT THIS REQUEST BASED UPON COURSE ID TO GET APPROPRIATE COURSE DESCRIPTION 
   // AS WELL AS APPROPRIATE PROBLEM INFORMATION
-  componentDidMount(){
-    axios.get('http://localhost:3001/admin/v1/problems')
-    .then(response => {
-      this.setState({
-        problems: response.data
-      })
+  async componentDidMount(){
+    
+    const coursesRequest = await axios.get(`http://localhost:3001/admin/v1/courses/${this.props.match.params.id}`);
+    const problemsRequest = await axios.get(`http://localhost:3001/admin/v1/courses/${this.props.match.params.id}/problems`);
+  
+    this.setState({
+      course: coursesRequest.data,
+      problems: problemsRequest.data
     })
-    .catch(error => console.log(error))
   }
 
   render() {
@@ -56,21 +58,30 @@ class CoursesShow extends Component {
     });
 
     return(
-      <div className="problems">
-        Course ID: {this.props.match.params.id}
-        <br/>
-        User: {this.props.userID}
-        {problems}
-        { this.props.teacher &&
-          <div className='teacherLinks'>
-            <Link to={`${this.props.match.url}/problems/new`} >
-              Create a problem
-            </Link>
-            <CoursesUpdate teacher={this.props.teacher}/>
-            <CoursesDelete teacher={this.props.teacher}/>
+      <React.Fragment>
+        <div className="course">
+          <h1>
+            {this.state.course.name}
+          </h1>
+          <div>
+            {this.state.course.description}
           </div>
-        }
-      </div>
+        </div>
+        <br />
+        <div className="problems">
+          
+          {problems}
+          { this.props.teacher &&
+            <div className='teacherLinks'>
+              <Link to={`${this.props.match.url}/problems/new`} >
+                Create a problem
+              </Link>
+              <CoursesUpdate teacher={this.props.teacher}/>
+              <CoursesDelete teacher={this.props.teacher}/>
+            </div>
+          }
+        </div>
+      </React.Fragment>
     );
 
   }
