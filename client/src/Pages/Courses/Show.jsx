@@ -57,7 +57,7 @@ class CoursesShow extends Component {
         <div key={index}>
           <ul>
             <li>
-              <Link to={`${this.props.match.url}/problems/${problem.id}`} teacher={this.props.teacher} >
+              <Link to={`${this.props.match.url}/problems/${problem.id}`} >
                   {problem.id} : {problem.statement}
               </Link>
               { this.props.teacher && 
