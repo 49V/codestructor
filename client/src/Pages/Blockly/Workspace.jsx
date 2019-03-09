@@ -3,6 +3,7 @@ import Blockly from 'node-blockly/browser';
 import axios from 'axios';
 
 import BlocklyDrawer, { Block, Category } from 'react-blockly-drawer';
+import Library from './Library.jsx'
 
 class Workspace extends Component {
   constructor(props) {
@@ -26,12 +27,12 @@ class Workspace extends Component {
   } 
 
   getWorkspaceCode = (code, workspace) => {
-    console.log(code)
     if (this.props.solution && eval(code) === this.props.solution) {
       // alert('Got it!');
       console.log('solved');
     }
   }
+
 
 
   render() {
@@ -48,13 +49,7 @@ class Workspace extends Component {
           workspaceXML={this.props.workspaceXML}
           onChange={this.getWorkspaceCode}
         >
-
-          <Category name='Variables' custom='VARIABLE' />
-          <Category name='Values'>
-            <Block type='math_number' />
-            <Block type='text' />
-          </Category>
-  
+          <Library />
         </BlocklyDrawer>
       </div>
     );
