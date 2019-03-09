@@ -17,16 +17,26 @@ class CoursesIndex extends Component {
     };
   }
 
-  componentDidMount() {
-    axios.get('http://localhost:3001/admin/v1/courses')
-    .then(response => {
-      this.setState({
-        courses: response.data
-      })
-    })
-    .catch(error => console.log(error))
+  setStateAsync(state) {
+    return new Promise((resolve) => {
+      this.setState(state, resolve)
+    });
   }
 
+  async componentDidMount() {
+    const coursesResponse = await axios.get('http://localhost:3001/admin/v1/courses');
+    
+    await this.setStateAsync({
+      courses: coursesResponse.data
+    });
+    
+  }
+  //Student Only Actions
+  enrollCourse = (newCourse) => {
+    this.forceUpdate();
+  }
+
+  // Teacher Only Actions
   addNewCourse = (newCourse) => {
     this.setState({
       courses: [...this.state.courses, newCourse]
@@ -58,30 +68,100 @@ class CoursesIndex extends Component {
   }
 
   render() {
-    let courses = this.state.courses.map((course, index) => {
-      return(
-        <div key={index}>
-          <ul>
-            <li>
-              <Link to={`${this.props.match.url}/${course.id}`}>
-                {course.name} : {course.id}
-              </Link>
-            </li>
-            { this.props.teacher && <li>
-              <Delete deleteCourse={this.deleteCourse} courseId={course.id} />
-            </li> }
-          </ul>
-        </div>
-      );
-    }); 
+    
+      const courses = {};
+
+      if(this.props.teacher) {
+        courses.owned = this.state.courses.map((course, index) => {          
+          return(
+            <div key={index}>
+              <ul>
+                <li>
+                  <Link to={`${this.props.match.url}/${course.id}`}>
+                    {course.name} : {course.id}
+                  </Link>
+                </li>
+                { 
+                  !this.props.teacher &&
+                  <li>
+                    Enroll
+                  </li> 
+                }
+                { this.props.teacher && <li>
+                  <Delete deleteCourse={this.deleteCourse} courseId={course.id} />
+                </li> }
+              </ul>
+            </div>
+          );
+        })
+    } else if(this.state.courses.owned) {
+      
+      courses.owned = this.state.courses.owned.map((course, index) => {          
+        return(
+          <div key={index}>
+            <ul>
+              <li>
+                <Link to={`${this.props.match.url}/${course.id}`}>
+                  {course.name} : {course.id}
+                </Link>
+              </li>
+              { 
+                !this.props.teacher &&
+                <li>
+                  Enroll
+                </li> 
+              }
+              { this.props.teacher && <li>
+                <Delete deleteCourse={this.deleteCourse} courseId={course.id} />
+              </li> }
+            </ul>
+          </div>
+        );
+      })
+
+      courses.unowned = this.state.courses.unowned.map((course, index) => {          
+        return(
+          <div key={index}>
+            <ul>
+              <li>
+                <Link to={`${this.props.match.url}/${course.id}`}>
+                  {course.name} : {course.id}
+                </Link>
+              </li>
+              { 
+                !this.props.teacher &&
+                <li>
+                  Enroll
+                </li> 
+              }
+              { this.props.teacher && <li>
+                <Delete deleteCourse={this.deleteCourse} courseId={course.id} />
+              </li> }
+            </ul>
+          </div>
+        );
+      })
+    }
+    
+    
 
     return (
       <div className="courses">
-        <h1>{courses}</h1>
+        <h1></h1>
         {/* CREATE COMPONENT */}
+        
+        { !this.props.teacher &&
+          <h1> Enrolled courses</h1>}
+        { courses.owned }        
+
+        { !this.props.teacher &&
+          <h1> Other courses</h1>}
+        { courses.unowned }
+
         { this.props.teacher && 
-          <Create addNewCourse={this.addNewCourse} teacher={this.props.teacher}/>
+          <Create addNewCourse={this.addNewCourse} teacher={this.props.teacher}/> 
          }        
+
       </div>
     );
   }

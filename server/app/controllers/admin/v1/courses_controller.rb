@@ -5,11 +5,12 @@ class Admin::V1::CoursesController < ApplicationController
   def index
     if @current_user.teacher
       courses = @current_user.created_courses
+      render json: courses
     else
-      courses = @current_user.courses
+      owned_courses = @current_user.courses      
+      unowned_courses = Course.joins(:students).where("courses_users.user_id != ?", @current_user.id)
+      render json: { owned: owned_courses, unowned: unowned_courses }
     end
-    
-    render json: courses
   end
 
   # GET /courses/1
@@ -42,6 +43,13 @@ class Admin::V1::CoursesController < ApplicationController
   # DELETE /courses/1
   def destroy
     @course.destroy if(@current_user.teacher) 
+  end
+
+  def enroll
+    debugger;
+    # if !@current_user.teacher
+    #   @current_user.courses << @course
+    # end
   end
 
   private

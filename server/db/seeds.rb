@@ -41,6 +41,12 @@ student1 = User.create!({
   teacher: false,
 })
 
+student2 = User.create!({
+  email: 'student2@school.ca',
+  password: 'password',
+  teacher: false,
+})
+
 problem1 = Problem.create!({
   statement: 'A basic problem.',
   description: 'not too difficult',
@@ -63,3 +69,4 @@ problem3 = Problem.create!({
 })
 
 student1.courses << Course.find(course1.id)
+student2.courses << Course.find(course2.id)
