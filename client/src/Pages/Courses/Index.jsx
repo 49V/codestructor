@@ -3,10 +3,11 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 
 import { instanceOf } from 'prop-types';
-import Create from  './Create.jsx'
-import Delete from  './Delete.jsx'
-import Enroll from  './Enroll.jsx'   
-import Update  from  './Update.jsx'
+import Create from  './Create.jsx';
+import Delete from  './Delete.jsx';
+import Drop from './Drop.jsx';
+import Enroll from  './Enroll.jsx';   
+import Update  from  './Update.jsx';
 import App from '../../App.jsx';
 
 class CoursesIndex extends Component {
@@ -42,7 +43,7 @@ class CoursesIndex extends Component {
 
   deleteCourse = (courseId) => {
     let currentCourses = this.state.courses;
-    const deleteIndex = this.findDeleteIndex(courseId, currentCourses);
+    const deleteIndex = this.findCourseIndex(courseId, currentCourses);
 
     if(deleteIndex + 1) {
       currentCourses.splice(deleteIndex, 1);
@@ -53,20 +54,63 @@ class CoursesIndex extends Component {
     })
   }
 
-  //Student Only Actions
-  enrollCourse = (courseId) => {
-    // Remove from unowned courses
+  // STUDENT ONLY ACTIONS
+  
+  /*
+    * Allows the <Drop /> component to change the state of the CoursesIndex page to show dropped course
+    *
+    * @param courseId: typeof Number : A number containing the courseId of the course to be dropped
+    * 
+    * @returns undefined
+  */
+  dropCourse = (courseId) => {
+
     const unownedCourses = this.state.courses.unowned;
     const ownedCourses = this.state.courses.owned;
     let swappedCourse;
 
-    const deleteIndex = this.findDeleteIndex(courseId, unownedCourses);
+    // Find the course to be removed from ownedCourses (Courses student is enrolled in)
+    const swapIndex = this.findCourseIndex(courseId, ownedCourses);
 
-    if(deleteIndex + 1) {
-      swappedCourse = unownedCourses[deleteIndex]
-      unownedCourses.splice(deleteIndex, 1);
+    // If the course exists, we will drop it(move it from the ownedCourses -> unownedCourses)
+    if(swapIndex + 1) {
+      swappedCourse = ownedCourses[swapIndex];
+      ownedCourses.splice(swapIndex, 1);
+      unownedCourses.push(swappedCourse);
     }
-    ownedCourses.push(swappedCourse);
+
+    const courses = {
+      owned: ownedCourses,
+      unowned: unownedCourses
+    };
+
+    this.setState({
+      courses
+    });
+  }
+
+  /*
+    * Allows the <Enroll /> component to change the state of the CoursesIndex page to show enrolled course
+    *
+    * @param courseId: typeof Number : A number containing the courseId of the course to be enrolled in
+    * 
+    * @returns undefined
+  */
+  enrollCourse = (courseId) => {
+
+    const unownedCourses = this.state.courses.unowned;
+    const ownedCourses = this.state.courses.owned;
+    let swappedCourse;
+
+    // Find the course to be removed from unownedCourses (Courses student isn't enrolled in)
+    const swapIndex = this.findCourseIndex(courseId, unownedCourses);
+
+    // If the course exists, we will enroll (move it from unownedCourses -> ownedCourses)
+    if(swapIndex + 1) {
+      swappedCourse = unownedCourses[swapIndex]
+      unownedCourses.splice(swapIndex, 1);
+      ownedCourses.push(swappedCourse);
+    }
 
     const courses = {
       owned: ownedCourses,
@@ -75,18 +119,39 @@ class CoursesIndex extends Component {
 
     this.setState({
       courses
-    })
+    });
   }
 
-  findDeleteIndex = (courseId, targetCourseList) => {
+  /*
+    * For an array of objects, 
+    *   IF EXISTS returns the index that matches the id
+    *   OTHERWISE returns -1
+    *
+    * Example Input:
+    * id = 28;
+    * targetCourseList = [
+    *   {id = 1, data = <something> }
+    *   {id = 4, data = <something> }
+    *   {id = 28, data = <something> }
+    *   {id = 977, data = <something> } 
+    * ]
+    * 
+    * Example Output:
+    * 2
+    * 
+    * @param id: typeof Number : A number containing the course id of the course we are searching for
+    *
+    * @returns targetIndex : typeof Number : A number containing the index IF found ELSE -1
+  */
+  findCourseIndex = (id, targetCourseList) => {
     let currentCourses = targetCourseList;
-    let deleteIndex = 1;
+    let targetIndex = 1;
     currentCourses.forEach( (course, index) => {
-      if(course.id === courseId) {
-        deleteIndex = index;
+      if(course.id === id) {
+        targetIndex = index;
       }
     });
-    return deleteIndex;
+    return targetIndex;
   }
 
   render() {
@@ -127,9 +192,7 @@ class CoursesIndex extends Component {
                   {course.name} : {course.id}
                 </Link>
               </li>
-              { this.props.teacher && <li>
-                <Delete deleteCourse={this.deleteCourse} courseId={course.id} />
-              </li> }
+                <Drop courseId={course.id }dropCourse={this.dropCourse} />
             </ul>
           </div>
         );
@@ -144,15 +207,9 @@ class CoursesIndex extends Component {
                   {course.name} : {course.id}
                 </Link>
               </li>
-              { 
-                !this.props.teacher &&
-                <li>
-                  <Enroll courseId={course.id} enrollCourse={this.enrollCourse}/>                  
-                </li> 
-              }
-              { this.props.teacher && <li>
-                <Delete deleteCourse={this.deleteCourse} courseId={course.id} />
-              </li> }
+              <li>
+                <Enroll courseId={course.id} enrollCourse={this.enrollCourse} />
+              </li>
             </ul>
           </div>
         );
