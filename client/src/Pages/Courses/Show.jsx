@@ -104,7 +104,6 @@ class CoursesShow extends Component {
                 Create a problem
               </Link>
               <CoursesUpdate courseId={this.props.match.params.id} updateCourse={this.updateCourse}/>
-              <CoursesDelete teacher={this.props.teacher}/>
             </div>
           }
         </div>

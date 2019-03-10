@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
-import Blockly from 'node-blockly/browser'; 
 import axios from 'axios';
 
-import BlocklyDrawer, { Block, Category } from 'react-blockly-drawer';
+import BlocklyDrawer from 'react-blockly-drawer';
 import Library from './Library.jsx'
 
 class Workspace extends Component {
@@ -27,10 +26,10 @@ class Workspace extends Component {
   } 
 
   getWorkspaceCode = (code, workspace) => {
-    if (this.props.solution && eval(code) === this.props.solution) {
-      // alert('Got it!');
-      console.log('solved');
-    }
+    // if (this.props.solution && eval(code) === this.props.solution) {
+      // console.log('solved');
+    // }
+    this.props.sendOutput(eval(code))
   }
 
 
@@ -40,9 +39,9 @@ class Workspace extends Component {
       <div>
         <h3>Problem: {this.state.problem.id || 'NEW'}</h3>
         <p>
-        {this.state.problem.description || 'PROBLEM FORM FIELD' }
+        {this.state.problem.description || '' }
           <br/>
-        {this.state.problem.statement || 'PROBLEM FORM FIELD' }
+        {this.state.problem.statement || '' }
         </p>
 
         <BlocklyDrawer
