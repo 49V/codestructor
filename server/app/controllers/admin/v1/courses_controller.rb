@@ -1,5 +1,5 @@
 class Admin::V1::CoursesController < ApplicationController
-  before_action :set_course, only: [:show, :update, :destroy]
+  before_action :set_course, only: [:enroll, :show, :update, :destroy]
 
   # GET /courses
   def index
@@ -7,8 +7,12 @@ class Admin::V1::CoursesController < ApplicationController
       courses = @current_user.created_courses
       render json: courses
     else
-      owned_courses = @current_user.courses      
-      unowned_courses = Course.joins(:students).where("courses_users.user_id != ?", @current_user.id)
+      owned_courses = @current_user.courses.as_json      
+      unowned_courses = Course.all.as_json;
+
+      owned_courses.each do |owned_course|
+        unowned_courses.delete(owned_course)
+      end
       render json: { owned: owned_courses, unowned: unowned_courses }
     end
   end
@@ -46,10 +50,9 @@ class Admin::V1::CoursesController < ApplicationController
   end
 
   def enroll
-    debugger;
-    # if !@current_user.teacher
-    #   @current_user.courses << @course
-    # end
+    if !@current_user.teacher
+      @current_user.courses << @course
+    end
   end
 
   private
@@ -60,6 +63,6 @@ class Admin::V1::CoursesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def course_params
-      params.require(:course).permit(:name, :description, :teacher_id)
+      params.require(:course).permit(:name, :description, :teacher_id, :course_id)
     end
 end

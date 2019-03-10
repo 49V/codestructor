@@ -3,8 +3,9 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 
 import { instanceOf } from 'prop-types';
-import Create  from  './Create.jsx'
-import Delete  from  './Delete.jsx'
+import Create from  './Create.jsx'
+import Delete from  './Delete.jsx'
+import Enroll from  './Enroll.jsx'   
 import Update  from  './Update.jsx'
 import App from '../../App.jsx';
 
@@ -31,11 +32,7 @@ class CoursesIndex extends Component {
     });
     
   }
-  //Student Only Actions
-  enrollCourse = (newCourse) => {
-    this.forceUpdate();
-  }
-
+  
   // Teacher Only Actions
   addNewCourse = (newCourse) => {
     this.setState({
@@ -44,8 +41,8 @@ class CoursesIndex extends Component {
   } 
 
   deleteCourse = (courseId) => {
-    const deleteIndex = this.findDeleteIndex(courseId);
     let currentCourses = this.state.courses;
+    const deleteIndex = this.findDeleteIndex(courseId, currentCourses);
 
     if(deleteIndex + 1) {
       currentCourses.splice(deleteIndex, 1);
@@ -56,8 +53,33 @@ class CoursesIndex extends Component {
     })
   }
 
-  findDeleteIndex = (courseId) => {
-    let currentCourses = this.state.courses;
+  //Student Only Actions
+  enrollCourse = (courseId) => {
+    // Remove from unowned courses
+    const unownedCourses = this.state.courses.unowned;
+    const ownedCourses = this.state.courses.owned;
+    let swappedCourse;
+
+    const deleteIndex = this.findDeleteIndex(courseId, unownedCourses);
+
+    if(deleteIndex + 1) {
+      swappedCourse = unownedCourses[deleteIndex]
+      unownedCourses.splice(deleteIndex, 1);
+    }
+    ownedCourses.push(swappedCourse);
+
+    const courses = {
+      owned: ownedCourses,
+      unowned: unownedCourses
+    }
+
+    this.setState({
+      courses
+    })
+  }
+
+  findDeleteIndex = (courseId, targetCourseList) => {
+    let currentCourses = targetCourseList;
     let deleteIndex = 1;
     currentCourses.forEach( (course, index) => {
       if(course.id === courseId) {
@@ -105,12 +127,6 @@ class CoursesIndex extends Component {
                   {course.name} : {course.id}
                 </Link>
               </li>
-              { 
-                !this.props.teacher &&
-                <li>
-                  Enroll
-                </li> 
-              }
               { this.props.teacher && <li>
                 <Delete deleteCourse={this.deleteCourse} courseId={course.id} />
               </li> }
@@ -131,7 +147,7 @@ class CoursesIndex extends Component {
               { 
                 !this.props.teacher &&
                 <li>
-                  Enroll
+                  <Enroll courseId={course.id} enrollCourse={this.enrollCourse}/>                  
                 </li> 
               }
               { this.props.teacher && <li>
