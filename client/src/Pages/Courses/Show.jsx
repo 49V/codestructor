@@ -25,7 +25,8 @@ class CoursesShow extends Component {
     this.setState({
       course: coursesRequest.data,
       problems: problemsRequest.data
-    })
+    });
+    
   }
 
   updateCourse = (updatedCourse) => {
