@@ -14,10 +14,11 @@ class Admin::V1::ProblemsController < ApplicationController
 
   # POST /:courses_id/problems
   def create
+    # debugger;
     @problem = Problem.new(problem_params)
 
     if @problem.save
-      render json: @problem, status: :created, location: @problem
+      render json: @problem
     else
       render json: @problem.errors, status: :unprocessable_entity
     end
@@ -45,6 +46,6 @@ class Admin::V1::ProblemsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def problem_params
-      params.require(:problem).permit(:statement, :description, :solution, :references)
+      params.require(:problem).permit(:course_id, :statement, :description, :solution, :references)
     end
 end
