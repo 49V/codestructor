@@ -43,7 +43,7 @@ class CoursesIndex extends Component {
 
   deleteCourse = (courseId) => {
     let currentCourses = this.state.courses;
-    const deleteIndex = this.findIndex(courseId, currentCourses);
+    const deleteIndex = this.findCourseIndex(courseId, currentCourses);
 
     if(deleteIndex + 1) {
       currentCourses.splice(deleteIndex, 1);
@@ -54,10 +54,14 @@ class CoursesIndex extends Component {
     })
   }
 
-  //Student Only Actions
-
+  // STUDENT ONLY ACTIONS
+  
   /*
-  * Allows the <Drop /> component to change the state of the CoursesIndex page in order to show  course has been dropped
+    * Allows the <Drop /> component to change the state of the CoursesIndex page to show dropped course
+    *
+    * @param courseId: typeof Number : A number containing the courseId of the course to be dropped
+    * 
+    * @returns undefined
   */
   dropCourse = (courseId) => {
 
@@ -65,8 +69,10 @@ class CoursesIndex extends Component {
     const ownedCourses = this.state.courses.owned;
     let swappedCourse;
 
-    const swapIndex = this.findIndex(courseId, ownedCourses);
+    // Find the course to be removed from ownedCourses (Courses student is enrolled in)
+    const swapIndex = this.findCourseIndex(courseId, ownedCourses);
 
+    // If the course exists, we will drop it(move it from the ownedCourses -> unownedCourses)
     if(swapIndex + 1) {
       swappedCourse = ownedCourses[swapIndex];
       ownedCourses.splice(swapIndex, 1);
@@ -83,21 +89,26 @@ class CoursesIndex extends Component {
     });
   }
 
-
   /*
-  * Allows the <Enroll /> component to change the state of the CoursesIndex page in order to show  course has been enrolled in
+    * Allows the <Enroll /> component to change the state of the CoursesIndex page to show enrolled course
+    *
+    * @param courseId: typeof Number : A number containing the courseId of the course to be enrolled in
+    * 
+    * @returns undefined
   */
   enrollCourse = (courseId) => {
-    // Remove from unowned courses
+
     const unownedCourses = this.state.courses.unowned;
     const ownedCourses = this.state.courses.owned;
     let swappedCourse;
 
-    const deleteIndex = this.findIndex(courseId, unownedCourses);
+    // Find the course to be removed from unownedCourses (Courses student isn't enrolled in)
+    const swapIndex = this.findCourseIndex(courseId, unownedCourses);
 
-    if(deleteIndex + 1) {
-      swappedCourse = unownedCourses[deleteIndex]
-      unownedCourses.splice(deleteIndex, 1);
+    // If the course exists, we will enroll (move it from unownedCourses -> ownedCourses)
+    if(swapIndex + 1) {
+      swappedCourse = unownedCourses[swapIndex]
+      unownedCourses.splice(swapIndex, 1);
       ownedCourses.push(swappedCourse);
     }
 
@@ -111,15 +122,36 @@ class CoursesIndex extends Component {
     });
   }
 
-  findIndex = (courseId, targetCourseList) => {
+  /*
+    * For an array of objects, 
+    *   IF EXISTS returns the index that matches the id
+    *   OTHERWISE returns -1
+    *
+    * Example Input:
+    * id = 28;
+    * targetCourseList = [
+    *   {id = 1, data = <something> }
+    *   {id = 4, data = <something> }
+    *   {id = 28, data = <something> }
+    *   {id = 977, data = <something> } 
+    * ]
+    * 
+    * Example Output:
+    * 2
+    * 
+    * @param id: typeof Number : A number containing the course id of the course we are searching for
+    *
+    * @returns targetIndex : typeof Number : A number containing the index IF found ELSE -1
+  */
+  findCourseIndex = (id, targetCourseList) => {
     let currentCourses = targetCourseList;
-    let deleteIndex = 1;
+    let targetIndex = 1;
     currentCourses.forEach( (course, index) => {
-      if(course.id === courseId) {
-        deleteIndex = index;
+      if(course.id === id) {
+        targetIndex = index;
       }
     });
-    return deleteIndex;
+    return targetIndex;
   }
 
   render() {

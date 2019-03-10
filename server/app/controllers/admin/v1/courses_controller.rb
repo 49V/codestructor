@@ -49,10 +49,8 @@ class Admin::V1::CoursesController < ApplicationController
     @course.destroy if(@current_user.teacher) 
   end
 
-
   def drop
     if !@current_user.teacher
-      @course
       @current_user.courses.delete(@course)
     end
   end
