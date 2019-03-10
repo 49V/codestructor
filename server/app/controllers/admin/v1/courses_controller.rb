@@ -1,5 +1,5 @@
 class Admin::V1::CoursesController < ApplicationController
-  before_action :set_course, only: [:enroll, :show, :update, :destroy]
+  before_action :set_course, only: [:drop, :enroll, :show, :update, :destroy]
 
   # GET /courses
   def index
@@ -47,6 +47,14 @@ class Admin::V1::CoursesController < ApplicationController
   # DELETE /courses/1
   def destroy
     @course.destroy if(@current_user.teacher) 
+  end
+
+
+  def drop
+    if !@current_user.teacher
+      @course
+      @current_user.courses.delete(@course)
+    end
   end
 
   def enroll
