@@ -26,10 +26,15 @@ class Workspace extends Component {
   } 
 
   getWorkspaceCode = (code, workspace) => {
-    // if (this.props.solution && eval(code) === this.props.solution) {
-      // console.log('solved');
-    // }
     this.props.sendOutput(eval(code))
+    if ((!this.props.teacher) && eval(code) === this.state.problem.solution) {
+      console.log('solved');
+      axios.post(`http://localhost:3001/admin/v1${this.props.path}`)
+      .then(response => {
+        console.log(response.data); 
+      })
+      .catch(error => console.log(error))
+    }
   }
 
 
@@ -47,6 +52,7 @@ class Workspace extends Component {
         <BlocklyDrawer
           workspaceXML={this.props.workspaceXML}
           onChange={this.getWorkspaceCode}
+          teacher={this.props.teacher}
         >
           <Library />
         </BlocklyDrawer>

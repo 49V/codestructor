@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 import CoursesDelete  from  './Delete.jsx';
 import CoursesUpdate  from  './Update.jsx';
-import ProblemsDelete from '../Problems/Delete.jsx';
+import ProblemsDelete from './Problems/Delete.jsx';
 
 class CoursesShow extends Component {
 

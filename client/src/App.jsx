@@ -7,9 +7,9 @@ import CoursesNew     from  './Pages/Courses/Create.jsx'
 import CoursesIndex   from  './Pages/Courses/Index.jsx';
 import CoursesShow    from  './Pages/Courses/Show.jsx';
 import CoursesUpdate  from  './Pages/Courses/Update.jsx'
-import ProblemsNew    from  './Pages/Problems/Create.jsx';
-import ProblemsShow   from  './Pages/Problems/Show.jsx';
-import ProblemsUpdate from  './Pages/Problems/Update.jsx';
+import ProblemsNew    from  './Pages/Courses/Problems/Create.jsx';
+import ProblemsShow   from  './Pages/Courses/Problems/Show.jsx';
+import ProblemsUpdate from  './Pages/Courses/Problems/Update.jsx';
 
 const defaultUserID = 2;
 axios.defaults.headers.common['UserID'] = defaultUserID;

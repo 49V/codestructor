@@ -7,6 +7,7 @@ Rails.application.routes.draw do
       delete '/courses/:id/drop', to: 'courses#drop'
       resources :courses do
         resources :problems
+        post 'problems/:id', to: 'complete_problems#create'
       end
     end
   end

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import Workspace from '../Blockly/Workspace.jsx'
+import Workspace from '../../Blockly/Workspace.jsx'
 import axios from 'axios';
 
 class ProblemsCreate extends Component {
