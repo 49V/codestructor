@@ -27,13 +27,15 @@ class Workspace extends Component {
 
   getWorkspaceCode = (code, workspace) => {
     this.props.sendOutput(eval(code))
-    if ((!this.props.teacher) && eval(code) === this.state.problem.solution) {
+    if (eval(code) === this.state.problem.solution) {
       console.log('solved');
-      axios.post(`http://localhost:3001/admin/v1${this.props.path}`)
-      .then(response => {
-        console.log(response.data); 
-      })
-      .catch(error => console.log(error))
+      if (!this.props.teacher) {
+        axios.post(`http://localhost:3001/admin/v1${this.props.path}`)
+        .then(response => {
+          console.log(response.data); 
+        })
+        .catch(error => console.log(error))
+      }
     }
   }
 

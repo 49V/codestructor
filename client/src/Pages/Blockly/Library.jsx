@@ -34,6 +34,9 @@ class Library extends Component {
         <Category name='Math'>
           {blocks.slice(39, 53)}
         </Category>
+        <Category name='Text'>
+          {blocks.slice(61,80)}
+        </Category>
         {/* NOTE THAT PROCEDURES AND TEXTS ARE LEFT OUT */}
         <Category name='Variables'>
           <Category name= 'New' custom='VARIABLE' />
