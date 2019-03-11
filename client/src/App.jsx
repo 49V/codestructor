@@ -56,7 +56,6 @@ class App extends Component {
           <li><Link to="/">Home</Link></li>
           <li><Link to="/courses">Courses</Link></li>
         </ul>
-
         <button className='devHelper' onClick={ () => { 
             this.props.cookies.set('id', this.state.user.id === 2 ? 3 : 2);
             axios.defaults.headers.common['UserID'] = this.props.cookies.get('id'); // for all requests

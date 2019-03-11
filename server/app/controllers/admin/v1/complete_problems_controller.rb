@@ -6,8 +6,13 @@ class Admin::V1::CompleteProblemsController < ApplicationController
       @complete_problem = CompleteProblem.new(submit_params)
       if @complete_problem.save
         puts 'we gucci'
+        # TO DO!!!!!!!
       end
     end
+  end
+
+  def status
+    render json: has_completed?
   end
 
   def check_duplicate
@@ -15,6 +20,11 @@ class Admin::V1::CompleteProblemsController < ApplicationController
   end
   private
   # Use callbacks to share common setup or constraints between actions.
+
+  def has_completed?
+    CompleteProblem.where("user_id=? and problem_id=?", @current_user[:id], params[:id]).size > 0
+  end
+
   def submit_params
     params["user_id"] = @current_user.id
     params["problem_id"] = params[:id]
