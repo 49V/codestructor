@@ -22,9 +22,28 @@ import {
 } from 'react-router-dom'
 
 const Home = () => (
-  <div>
-    <h2> Home </h2>
-  </div>
+  <React.Fragment>
+  <section className="homePage">
+    <div className="content">
+      <div class="title">
+        <h2> Welcome to Codestructor </h2>
+      </div>
+      <div class="continue">
+        <Link to="/courses" style={{ color: '#0C8D30', textDecoration: 'none' }}>
+          <i className="fas fa-play-circle button"></i>
+          <div className="text">
+            Continue your journey
+          </div>
+        </Link>
+      </div>
+      <div class="pitch">
+        <p>
+          Codestructor is tool that allows educators to create content for students to engage with computational thinking without needing to know how to code. Students are able to solve algorithm based problems using drag and drop blocks, placing greater emphasis on problem solving ability as opposed to language fluency. Educators can easily construct courses and problems for students to enroll in and test their abilities.
+        </p>
+      </div>
+    </div>
+  </section>
+  </React.Fragment>
 );
 
 class App extends Component {
@@ -51,20 +70,28 @@ class App extends Component {
 
   render() {
     return (
-      <div>
-        <ul>
-          <li><Link to="/">Home</Link></li>
-          <li><Link to="/courses">Courses</Link></li>
-        </ul>
-
-        <button className='devHelper' onClick={ () => { 
+      <React.Fragment>
+        <div className="navbar">
+          
+          <span className="link">
+            <Link to="/" style={{ color: 'white', textDecoration: 'none' }}>
+              🅲🅾🅳🅴🆂🆃🆁🆄🅲🆃🅾🆁
+            </Link>
+          </span>
+          
+          <span className="session">
+            Sign Out
+          </span>
+        </div>
+        
+        {/* <button className='devHelper' onClick={ () => { 
             this.props.cookies.set('id', this.state.user.id === 2 ? 3 : 2);
             axios.defaults.headers.common['UserID'] = this.props.cookies.get('id'); // for all requests
             this.componentDidMount();
             }
           }> Logged in as: {(this.state.user.teacher ? 'Teacher' : 'Student')} 
-        </button>
-        
+        </button> */}
+
         {/* All of our routes are defined here */}
         <Switch>
           <Route path="/" exact component={Home}/>
@@ -77,7 +104,7 @@ class App extends Component {
           <Route path="/courses/:id/problems/:id/edit" exact render={ (props) => <ProblemsUpdate {...props} teacher={this.state.user.teacher} /> } />
           <Route render={() => {return <h1>You just 404'd</h1>}} />
         </Switch>
-      </div>
+      </React.Fragment>
     );
   }
 }

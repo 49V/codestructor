@@ -10,7 +10,7 @@ module.exports = {
   ],
   output: {
     path: path.join(__dirname, 'dist'),
-    filename: 'bundle.js',
+    filename: 'bundle.js',  
     publicPath: '/build/'
   },
   module: {
@@ -25,8 +25,12 @@ module.exports = {
         use: [
           'style-loader',
           'css-loader',
-          'sass-loader'
+          'sass-loader',
         ]
+      },
+      {
+        test: /\.(png|jpg|gif)$/,
+        loader: 'url-loader'
       }
     ]
   }
