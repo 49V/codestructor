@@ -1,5 +1,5 @@
 class Admin::V1::CoursesController < ApplicationController
-  before_action :set_course, only: [:drop, :enroll, :show, :update, :destroy]
+  before_action :set_course, only: [:drop, :enroll, :show, :update, :destroy, :enrolled_students]
 
   # GET /courses
   def index
@@ -53,6 +53,11 @@ class Admin::V1::CoursesController < ApplicationController
     if !@current_user.teacher
       @current_user.courses.delete(@course)
     end
+  end
+
+  def enrolled_students
+    students = @course.students
+    render json: students
   end
 
   def enroll

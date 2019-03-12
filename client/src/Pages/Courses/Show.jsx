@@ -21,10 +21,12 @@ class CoursesShow extends Component {
     
     const coursesRequest = await axios.get(`http://localhost:3001/admin/v1/courses/${this.props.match.params.id}`);
     const problemsRequest = await axios.get(`http://localhost:3001/admin/v1/courses/${this.props.match.params.id}/problems`);
+    const studentsRequest = await axios.get(`http://localhost:3001/admin/v1/courses/${this.props.match.params.id}/enrolled`);
   
     this.setState({
       course: coursesRequest.data,
-      problems: problemsRequest.data
+      problems: problemsRequest.data,
+      students: studentsRequest.data
     });
     
   }
@@ -83,7 +85,9 @@ class CoursesShow extends Component {
         </div>
       );
     });
-
+    let studentEmails = this.state.students ? this.state.students.map( (student)=> {
+      return (<li>{student.email}</li>)
+    }) : null;
     return(
       <React.Fragment>
         <div className="course">
@@ -93,6 +97,10 @@ class CoursesShow extends Component {
           <div>
             {this.state.course.description}
           </div>
+          { this.props.teacher && this.state.students &&
+            <ul> Enrolled Students
+              {studentEmails}
+             </ul> }
         </div>
         <br />
         <div className="problems">

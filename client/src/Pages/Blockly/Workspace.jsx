@@ -14,7 +14,6 @@ class Workspace extends Component {
     }
   }
 
-
   componentDidMount() {
     if(this.state.path) {
       axios.get(`http://localhost:3001/admin/v1${this.props.path}.json`)
