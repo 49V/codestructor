@@ -31,6 +31,7 @@ class ProblemsShow extends Component {
   receiveOutput = (result, xml, solved) => {
     this.problemOut = result;
     this.problemXml = xml;
+    console.log(result)
     if (solved && !this.props.teacher) { 
       this.setState({ complete: true }) 
     }
