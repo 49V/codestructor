@@ -7,16 +7,18 @@ import Library from './Library.jsx'
 class Workspace extends Component {
   constructor(props) {
     super(props);
+    console.log(props)
     this.state = {
       problem: {},
       path: props.path,
+      teacher: props.teacher,
       workspaceXML: [props.workspaceXML || '']
     }
   }
 
   componentDidMount() {
     if(this.state.path) {
-      axios.get(`http://localhost:3001/admin/v1${this.props.path}.json`)
+      axios.get(`http://localhost:3001/admin/v1${this.state.path}.json`)
       .then(response => {
         this.setState({ problem: response.data });
       })
@@ -26,11 +28,11 @@ class Workspace extends Component {
 
   getWorkspaceCode = (code, workspace) => {
     let solved = (eval(code) === this.state.problem.solution)
-    this.props.sendOutput(eval(code), workspace, solved)
-    if (solved && !this.props.teacher) {
+    if (solved && !this.state.teacher && this.state.teacher !== undefined) {
       axios.post(`http://localhost:3001/admin/v1${this.state.path}`, { solution: workspace })
       .catch(error => console.log(error))
     }
+    this.props.sendOutput(eval(code), workspace, solved)
   }
 
 
