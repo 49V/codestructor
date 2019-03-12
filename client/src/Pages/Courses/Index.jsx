@@ -177,10 +177,6 @@ class CoursesIndex extends Component {
 
                 <div className="body">
                   {course.description}
-                  { 
-                    !this.props.teacher &&
-                      Enroll
-                  }
                 </div>
                 </Link>
             </div>            
@@ -191,14 +187,21 @@ class CoursesIndex extends Component {
       courses.owned = this.state.courses.owned.map((course, index) => {          
         return(
           <div className="item" key={index}>
-            <ul>
-              <li>
-                <Link to={`${this.props.match.url}/${course.id}`}>
-                  {course.name} : {course.id}
-                </Link>
-              </li>
-                <Drop courseId={course.id }dropCourse={this.dropCourse} />
-            </ul>
+            <span className="footer drop">
+              <Drop courseId={course.id }dropCourse={this.dropCourse} />
+            </span>
+            <Link to={`${this.props.match.url}/${course.id}`} style={{ color: '#0C8D30', textDecoration: 'none' }} >
+              
+              <div className="header">
+                  <h2>
+                    {course.name} 
+                  </h2>
+              </div>
+
+              <div className="body">
+                {course.description}
+              </div>
+              </Link>
           </div>
         );
       })
@@ -206,16 +209,21 @@ class CoursesIndex extends Component {
       courses.unowned = this.state.courses.unowned.map((course, index) => {          
         return(
           <div className="item" key={index}>
-            <ul>
-              <li>
-                <Link to={`${this.props.match.url}/${course.id}`}>
-                  {course.name} : {course.id}
-                </Link>
-              </li>
-              <li>
-                <Enroll courseId={course.id} enrollCourse={this.enrollCourse} />
-              </li>
-            </ul>
+            <span className="footer enroll">
+              <Enroll courseId={course.id} enrollCourse={this.enrollCourse} />
+            </span>
+            <Link to={`${this.props.match.url}/${course.id}`} style={{ color: '#0C8D30', textDecoration: 'none' }} >
+              
+              <div className="header">
+                  <h2>
+                    {course.name} 
+                  </h2>
+              </div>
+
+              <div className="body">
+                {course.description}
+              </div>
+              </Link>
           </div>
         );
       })

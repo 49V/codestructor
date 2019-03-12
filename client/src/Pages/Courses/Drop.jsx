@@ -17,7 +17,7 @@ class CoursesDrop extends Component {
   render() {
     return(
       <a href="" onClick={this.handleClick}>
-        Drop
+        <i className="far fa-calendar-times"></i>
       </a>
     );
   }

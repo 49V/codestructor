@@ -18,7 +18,7 @@ class CoursesEnroll extends Component {
   render() {
     return(
       <a href="" onClick={this.handleClick}>
-        Enroll
+        <i className="far fa-calendar-plus"></i>
       </a>
     );
   }

@@ -1,5 +1,6 @@
 $DARK_GREY: #545454;
 $GREEN: #0C8D30;
+$RED: #ba2025;
 
 .courses {
 
@@ -70,8 +71,29 @@ $GREEN: #0C8D30;
         // Put the action icons here(delete, and edit)
         float: right;
         margin-right:10px;
+        
         a {
-          color: #ba2025;
+          color: $RED;
+        }
+      }
+
+      .footer.drop {
+        // Put the action icons here(delete, and edit)
+        float: right;
+        margin-right:10px;
+        
+        a {
+          color: $RED;
+        }
+      }
+
+      .footer.enroll {
+        // Put the action icons here(delete, and edit)
+        float: right;
+        margin-right:10px;
+        
+        a {
+          color: $GREEN;
         }
       }
 
