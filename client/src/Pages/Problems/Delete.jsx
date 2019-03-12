@@ -18,14 +18,14 @@ class ProblemsDelete extends Component {
 
   render() {
     return(
-      <div>
+      <React.Fragment>
         { this.props.teacher ? 
         <a href="" onClick={this.handleClick}>
-          Delete
+          <i className="far fa-trash-alt"></i>          
         </a> 
         : 
         <h1> Hey! How'd you get here? This page is only for teachers. </h1> }
-      </div>
+      </React.Fragment>
     );
   }
 

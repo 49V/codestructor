@@ -193,9 +193,9 @@ class CoursesIndex extends Component {
             <Link to={`${this.props.match.url}/${course.id}`} style={{ color: '#0C8D30', textDecoration: 'none' }} >
               
               <div className="header">
-                  <h2>
-                    {course.name} 
-                  </h2>
+                <h2>
+                  {course.name} 
+                </h2>
               </div>
 
               <div className="body">
@@ -232,6 +232,7 @@ class CoursesIndex extends Component {
     
 
     return (
+      
       <div className="courses">
         
         <div className="owned">
@@ -239,7 +240,7 @@ class CoursesIndex extends Component {
             <h1> Enrolled courses</h1>}
 
           { this.props.teacher &&
-            <h1> Created Courses</h1>}
+            <h1 id="test"> Created Courses</h1>}
 
           { courses.owned }   
         </div>
@@ -250,12 +251,12 @@ class CoursesIndex extends Component {
           { courses.unowned }
         </div>
         
-        
         { this.props.teacher && 
             <Create addNewCourse={this.addNewCourse} teacher={this.props.teacher}/> 
-         }        
-
+         }   
       </div>
+
+      
     );
   }
 }
