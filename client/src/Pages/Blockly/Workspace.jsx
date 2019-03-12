@@ -27,7 +27,14 @@ class Workspace extends Component {
   } 
 
   getWorkspaceCode = (code, workspace) => {
-    let solved = (eval(code) === this.state.problem.solution)
+
+    let solution = eval(code);
+
+    if(typeof solution !== 'string') {
+      solution = solution.toString(10);
+    }
+
+    let solved = (solution === this.state.problem.solution)
     if (solved && !this.state.teacher && this.state.teacher !== undefined) {
       axios.post(`http://localhost:3001/admin/v1${this.state.path}`, { solution: workspace })
       .catch(error => console.log(error))

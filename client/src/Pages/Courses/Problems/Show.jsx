@@ -31,6 +31,7 @@ class ProblemsShow extends Component {
   receiveOutput = (result, xml, solved) => {
     this.problemOut = result;
     this.problemXml = xml;
+    console.log(result)
     if (solved && !this.props.teacher) { 
       this.setState({ complete: true }) 
     }
@@ -39,7 +40,7 @@ class ProblemsShow extends Component {
   render() {
     return(
       <div className="solver">
-        { this.state.complete && <h3> Great job! You got it! </h3> }
+        { this.state.complete && <h3 className="complete"> Great job! You got it! </h3> }
 
           <Workspace 
             id={this.props.match.params.id} 

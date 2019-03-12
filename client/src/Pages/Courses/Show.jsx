@@ -23,12 +23,18 @@ class CoursesShow extends Component {
     const problemsRequest = await axios.get(`http://localhost:3001/admin/v1/courses/${this.props.match.params.id}/problems`);
     const studentsRequest = await axios.get(`http://localhost:3001/admin/v1/courses/${this.props.match.params.id}/enrolled`);
   
+    if(!this.props.teacher) {
+      for(const problem of problemsRequest.data) {
+        let complete = await axios.get(`http://localhost:3001/admin/v1/courses/${coursesRequest.data.id}/problems/${problem.id}/status`);
+        problem.complete = complete.data
+      }
+   }
+
     this.setState({
       course: coursesRequest.data,
       problems: problemsRequest.data,
       students: studentsRequest.data
     });
-    
   }
 
   updateCourse = (updatedCourse) => {
