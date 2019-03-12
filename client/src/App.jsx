@@ -25,10 +25,10 @@ const Home = () => (
   <React.Fragment>
   <section className="homePage">
     <div className="content">
-      <div class="title">
+      <div className="title">
         <h2> Welcome to Codestructor </h2>
       </div>
-      <div class="continue">
+      <div className="continue">
         <Link to="/courses" style={{ color: '#0C8D30', textDecoration: 'none' }}>
           <i className="fas fa-play-circle button"></i>
           <div className="text">
@@ -36,7 +36,7 @@ const Home = () => (
           </div>
         </Link>
       </div>
-      <div class="pitch">
+      <div className="pitch">
         <p>
           Codestructor is tool that allows educators to create content for students to engage with computational thinking without needing to know how to code. Students are able to solve algorithm based problems using drag and drop blocks, placing greater emphasis on problem solving ability as opposed to language fluency. Educators can easily construct courses and problems for students to enroll in and test their abilities.
         </p>

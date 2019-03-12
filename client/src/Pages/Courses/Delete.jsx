@@ -21,7 +21,7 @@ class CoursesDelete extends Component {
   render() {
     return(
       <a href="" onClick={this.handleClick}>
-        Delete
+        <i className="far fa-trash-alt"></i>
       </a>
     );
   }

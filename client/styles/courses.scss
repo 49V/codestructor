@@ -1,0 +1,92 @@
+$DARK_GREY: #545454;
+$GREEN: #0C8D30;
+
+.courses {
+
+  background-color: rgba(0,0,0,0.15);
+  color: white;
+
+  h1 {
+    color: $DARK_GREY;
+    font-family: 'Raleway', sans-serif;
+    font-size: 40px;
+    font-weight: 400;
+    font-style: normal;
+  }
+
+  .create{
+
+    background-color: rgba(247, 239, 239, 0.25);
+
+    form {
+      font-family: 'Raleway', sans-serif;
+      font-size: 20px;
+      margin-left: 60px;
+
+      .line {
+        margin-bottom: 25px;
+
+        .submitButton{
+
+        }
+
+      }
+    }
+    
+  }
+
+  //DEFINITELY ADD A SWEET ASS HOVER EFFECT BOIII
+  %courses {
+
+    .item {
+
+      background-color: rgba(0,0,0,0.25);
+      border-radius: 5px;
+      border: 1px solid #cbcbcb;
+      opacity: 0.85;
+      padding-left: 15px;
+      padding-top: 5px;
+      margin-right: 50%;
+      margin-left: 60px;
+      margin-bottom: 30px;
+
+      &:hover {
+        border-color: #a7a4a4;
+        opacity: 1;
+      }
+
+      .header {
+        // Course title
+        font-size: 15px;
+      }
+
+      .body {
+        // Put course description here
+        color: white;
+        margin-bottom: 20px;
+      }
+
+      .footer {
+        // Put the action icons here(delete, and edit)
+        float: right;
+        margin-right:10px;
+        a {
+          color: #ba2025;
+        }
+      }
+
+    }
+
+  }
+
+  // Make this inherit from owned
+  .owned {
+    @extend %courses;
+  }
+
+  .unowned {
+    @extend %courses;
+  }
+
+
+}

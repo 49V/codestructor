@@ -161,31 +161,36 @@ class CoursesIndex extends Component {
       if(this.props.teacher) {
         courses.owned = this.state.courses.map((course, index) => {          
           return(
-            <div key={index}>
-              <ul>
-                <li>
-                  <Link to={`${this.props.match.url}/${course.id}`}>
-                    {course.name} : {course.id}
-                  </Link>
-                </li>
-                { 
-                  !this.props.teacher &&
-                  <li>
-                    Enroll
-                  </li> 
-                }
-                { this.props.teacher && <li>
+            <div className="item" key={index}>
+              <span className="footer">
+                { this.props.teacher &&
                   <Delete deleteCourse={this.deleteCourse} courseId={course.id} />
-                </li> }
-              </ul>
-            </div>
+                }
+              </span>
+              <Link to={`${this.props.match.url}/${course.id}`} style={{ color: '#0C8D30', textDecoration: 'none' }} >
+                
+                <div className="header">
+                    <h2>
+                      {course.name} 
+                    </h2>
+                </div>
+
+                <div className="body">
+                  {course.description}
+                  { 
+                    !this.props.teacher &&
+                      Enroll
+                  }
+                </div>
+                </Link>
+            </div>            
           );
         })
     } else if(this.state.courses.owned) {
       
       courses.owned = this.state.courses.owned.map((course, index) => {          
         return(
-          <div key={index}>
+          <div className="item" key={index}>
             <ul>
               <li>
                 <Link to={`${this.props.match.url}/${course.id}`}>
@@ -200,7 +205,7 @@ class CoursesIndex extends Component {
 
       courses.unowned = this.state.courses.unowned.map((course, index) => {          
         return(
-          <div key={index}>
+          <div className="item" key={index}>
             <ul>
               <li>
                 <Link to={`${this.props.match.url}/${course.id}`}>
@@ -220,19 +225,26 @@ class CoursesIndex extends Component {
 
     return (
       <div className="courses">
-        <h1></h1>
-        {/* CREATE COMPONENT */}
         
-        { !this.props.teacher &&
-          <h1> Enrolled courses</h1>}
-        { courses.owned }        
+        <div className="owned">
+          { !this.props.teacher &&
+            <h1> Enrolled courses</h1>}
 
-        { !this.props.teacher &&
-          <h1> Other courses</h1>}
-        { courses.unowned }
+          { this.props.teacher &&
+            <h1> Created Courses</h1>}
 
+          { courses.owned }   
+        </div>
+
+        <div className="unowned">
+          { !this.props.teacher &&
+            <h1> Other courses</h1>}
+          { courses.unowned }
+        </div>
+        
+        
         { this.props.teacher && 
-          <Create addNewCourse={this.addNewCourse} teacher={this.props.teacher}/> 
+            <Create addNewCourse={this.addNewCourse} teacher={this.props.teacher}/> 
          }        
 
       </div>
