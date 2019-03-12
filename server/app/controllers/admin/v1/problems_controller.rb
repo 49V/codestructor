@@ -14,7 +14,6 @@ class Admin::V1::ProblemsController < ApplicationController
 
   # POST /:courses_id/problems
   def create
-    # debugger;
     @problem = Problem.new(problem_params)
 
     if @problem.save

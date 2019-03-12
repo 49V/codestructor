@@ -13,7 +13,7 @@ class Admin::V1::CompleteProblemsController < ApplicationController
   end
 
   def has_progress?
-    CourseProgress.where(["problem_id = ? and user_id = ?", submit_params[:problem_id], submit_params[:user_id]]).size > 0
+    CourseProgress.where(["problem_id = ? and user_id = ?", submit_params[:problem_id], submit_params[:user_id]]).size > 0  
   end
 
   def status

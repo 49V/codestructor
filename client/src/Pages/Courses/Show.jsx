@@ -23,12 +23,18 @@ class CoursesShow extends Component {
     const problemsRequest = await axios.get(`http://localhost:3001/admin/v1/courses/${this.props.match.params.id}/problems`);
     const studentsRequest = await axios.get(`http://localhost:3001/admin/v1/courses/${this.props.match.params.id}/enrolled`);
   
+    if(!this.props.teacher) {
+      for(const problem of problemsRequest.data) {
+        let complete = await axios.get(`http://localhost:3001/admin/v1/courses/${coursesRequest.data.id}/problems/${problem.id}/status`);
+        problem.complete = complete.data
+      }
+   }
+
     this.setState({
       course: coursesRequest.data,
       problems: problemsRequest.data,
       students: studentsRequest.data
     });
-    
   }
 
   updateCourse = (updatedCourse) => {
@@ -69,6 +75,7 @@ class CoursesShow extends Component {
               <Link to={`${this.props.match.url}/problems/${problem.id}`} >
                   {problem.id} : {problem.statement}
               </Link>
+              { !this.props.teacher && problem.complete && <span> Solved this one! </span> }
               { this.props.teacher && 
               <ul>
               {/* Teacher Only Links */}
