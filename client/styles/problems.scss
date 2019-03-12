@@ -1,4 +1,4 @@
-$GREEN: #0C8D30;
+@import 'colors';
 
 .problems {
 
@@ -19,9 +19,9 @@ $GREEN: #0C8D30;
   }
 
   h2 {
-    color: #545454;
+    color: $PURPLE;
     font-family: 'Raleway', sans-serif;
-    font-weight: 200;
+    font-weight: 400;
   }
 
   .item {
@@ -60,7 +60,7 @@ $GREEN: #0C8D30;
 
       .far.fa-edit {
         font-size: 20px;
-        color: #ffc145;
+        color: $YELLOW;
         opacity: 0.6;
 
         &:hover {

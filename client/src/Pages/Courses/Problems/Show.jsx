@@ -38,22 +38,27 @@ class ProblemsShow extends Component {
 
   render() {
     return(
-      <div>
+      <div className="solver">
         { this.state.complete && <h3> Great job! You got it! </h3> }
-        <Workspace 
-          id={this.props.match.params.id} 
-          path={this.props.match.url} 
-          sendOutput={this.receiveOutput} 
-          teacher={this.props.teacher} 
-          completion={this.state.complete}
-        />
-        { this.props.teacher && 
-          <div> 
-            <Delete teacher={this.props.teacher}/>
+
+          <Workspace 
+            id={this.props.match.params.id} 
+            path={this.props.match.url} 
+            sendOutput={this.receiveOutput} 
+            teacher={this.props.teacher} 
+            completion={this.state.complete}
+          />
+
+          { this.props.teacher && 
+          <div className="edit"> 
             <Link to={`${this.props.match.url}/edit`} >
-              Edit
+            <div className="link">           
+              <i className="far fa-edit">Edit</i>
+            </div>
             </Link>
           </div> }
+
+          
       </div>
     );
   }

@@ -39,22 +39,36 @@ class Workspace extends Component {
 
   render() {
     return (
-      <div>
-        <h3>Problem: {this.state.problem.id || 'NEW'}</h3>
-        <p>
-        {this.state.problem.description || '' }
-          <br/>
-        {this.state.problem.statement || '' }
-        </p>
+      <React.Fragment>
 
-        <BlocklyDrawer
-          workspaceXML={this.props.workspaceXML}
-          onChange={this.getWorkspaceCode}
-          teacher={this.props.teacher}
-        >
-          <Library />
-        </BlocklyDrawer>
-      </div>
+        <div className="problem">  
+          <h1> Problem </h1> 
+          <div className="header">
+            <h3>
+              {this.state.problem.description}
+            </h3>
+          </div>
+
+          <div className="body">
+            {this.state.problem.statement}
+          </div>
+
+        </div>
+
+        <div className="workspace">
+          <h1>
+            Workspace
+          </h1>
+          <BlocklyDrawer
+            workspaceXML={this.props.workspaceXML}
+            onChange={this.getWorkspaceCode}
+            teacher={this.props.teacher}
+          >
+            <Library />
+          </BlocklyDrawer>
+        </div>
+
+      </React.Fragment>
     );
   }
 }

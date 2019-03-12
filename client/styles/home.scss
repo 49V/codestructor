@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400,700|Raleway:300i,400');
 @import url("https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css");
 
-$DARK_GREY: #545454;
+@import 'colors';
 
 .App {
   position: relative;

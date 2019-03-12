@@ -64,8 +64,6 @@ class CoursesShow extends Component {
     let problems = this.state.problems.map((problem, index) => {
       return(
         <div className="item" key={index}>
-
-
           <span className="footer">
             { this.props.teacher && 
               <React.Fragment>
