@@ -29,10 +29,7 @@ class Workspace extends Component {
     let solved = (eval(code) === this.state.problem.solution)
     this.props.sendOutput(eval(code), workspace, solved)
     if (solved && !this.props.teacher) {
-      axios.post(`http://localhost:3001/admin/v1${this.props.path}`)
-      .then(response => {
-        console.log(response.data); 
-      })
+      axios.post(`http://localhost:3001/admin/v1${this.state.path}`, { solution: workspace })
       .catch(error => console.log(error))
     }
   }

@@ -9,6 +9,11 @@ class Admin::V1::CompleteProblemsController < ApplicationController
         # TO DO!!!!!!!
       end
     end
+    CourseProgress.new(progress_params) unless has_progress?
+  end
+
+  def has_progress?
+    CourseProgress.where(["problem_id = ? and user_id = ?", submit_params[:problem_id], submit_params[:user_id]]).size > 0
   end
 
   def status
@@ -28,7 +33,13 @@ class Admin::V1::CompleteProblemsController < ApplicationController
   def submit_params
     params["user_id"] = @current_user.id
     params["problem_id"] = params[:id]
-    params.except(:course_id, :id).permit(:user_id, :problem_id)
+    params.except(:course_id, :id, :solution, :complete_problem).permit(:user_id, :problem_id)
+  end
+
+  def progress_params
+    params["user_id"] = @current_user.id
+    params["problem_id"] = params[:id]
+    params.except(:id, :complete_problem).permit(:user_id, :problem_id, :course_id, :solution)
   end
 
 end
