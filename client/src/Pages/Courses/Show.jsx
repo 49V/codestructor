@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 import CoursesDelete  from  './Delete.jsx';
 import CoursesUpdate  from  './Update.jsx';
-import ProblemsDelete from '../Problems/Delete.jsx';
+import ProblemsDelete from './Problems/Delete.jsx';
 
 class CoursesShow extends Component {
 
@@ -21,10 +21,12 @@ class CoursesShow extends Component {
     
     const coursesRequest = await axios.get(`http://localhost:3001/admin/v1/courses/${this.props.match.params.id}`);
     const problemsRequest = await axios.get(`http://localhost:3001/admin/v1/courses/${this.props.match.params.id}/problems`);
+    const studentsRequest = await axios.get(`http://localhost:3001/admin/v1/courses/${this.props.match.params.id}/enrolled`);
   
     this.setState({
       course: coursesRequest.data,
-      problems: problemsRequest.data
+      problems: problemsRequest.data,
+      students: studentsRequest.data
     });
     
   }
@@ -79,12 +81,12 @@ class CoursesShow extends Component {
 
             <div className="header">
               <h2>
-                {problem.statement}
+                {problem.description}
               </h2>
             </div>
 
             <div className="body">
-              {problem.description}
+              {problem.statement}
             </div>
 
           </Link>
@@ -92,7 +94,9 @@ class CoursesShow extends Component {
         </div>
       );
     });
-
+    let studentEmails = this.state.students ? this.state.students.map( (student)=> {
+      return (<li> {student.email} </li>)
+    }) : null;
     return(
       <React.Fragment>
         <div className="courses">
@@ -104,25 +108,30 @@ class CoursesShow extends Component {
               {this.state.course.description}
             </div>
           </div>
+          { this.props.teacher && this.state.students &&
+            <ul> Enrolled Students
+              {studentEmails}
+             </ul> }
         </div>
 
         <div className="problems">
+        
           <h2 id="title">
             Problems
           </h2>
+
           {problems}
 
-          <div>
-          <Link to={`${this.props.match.url}/problems/new`} >
-            <i className="fas fa-plus-circle"></i>
-          </Link>
-          </div>
-        </div>
+          { this.props.teacher &&
+            <div className='teacherLinks'>
+              <Link to={`${this.props.match.url}/problems/new`} >
+                <i className="fas fa-plus-circle"></i>
+              </Link>
+              <CoursesUpdate courseId={this.props.match.params.id} updateCourse={this.updateCourse}/>
+            </div>
+          }
 
-        { this.props.teacher &&    
-        <CoursesUpdate courseId={this.props.match.params.id} updateCourse={this.updateCourse}/>
-        } 
-        
+        </div>
 
       </React.Fragment>
     );

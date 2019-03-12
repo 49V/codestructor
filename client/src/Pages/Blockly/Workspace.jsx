@@ -1,54 +1,58 @@
 import React, {Component} from 'react';
-import Blockly from 'node-blockly/browser'; 
 import axios from 'axios';
 
-import BlocklyDrawer, { Block, Category } from 'react-blockly-drawer';
+import BlocklyDrawer from 'react-blockly-drawer';
+import Library from './Library.jsx'
 
 class Workspace extends Component {
   constructor(props) {
     super(props);
+    console.log(props)
     this.state = {
       problem: {},
-      workspaceXML: [props.workspaceXML || ''],
-      skipChange: false
+      path: props.path,
+      teacher: props.teacher,
+      workspaceXML: [props.workspaceXML || '']
     }
   }
 
-
   componentDidMount() {
-    axios.get(`http://localhost:3001/admin/v1/${this.props.path}.json`)
-    .then(response => {
-      this.setState({ problem: response.data });
-    })
-    .catch(error => console.log(error))
+    if(this.state.path) {
+      axios.get(`http://localhost:3001/admin/v1${this.state.path}.json`)
+      .then(response => {
+        this.setState({ problem: response.data });
+      })
+      .catch(error => console.log(error))
+    }
   } 
+
+  getWorkspaceCode = (code, workspace) => {
+    let solved = (eval(code) === this.state.problem.solution)
+    if (solved && !this.state.teacher && this.state.teacher !== undefined) {
+      axios.post(`http://localhost:3001/admin/v1${this.state.path}`, { solution: workspace })
+      .catch(error => console.log(error))
+    }
+    this.props.sendOutput(eval(code), workspace, solved)
+  }
+
 
 
   render() {
     return (
       <div>
-        <h3>Problem: {this.state.problem.id}</h3>
+        <h3>Problem: {this.state.problem.id || 'NEW'}</h3>
         <p>
-        {this.state.problem.description}
+        {this.state.problem.description || '' }
           <br/>
-        {this.state.problem.statement}
+        {this.state.problem.statement || '' }
         </p>
 
         <BlocklyDrawer
           workspaceXML={this.props.workspaceXML}
-          onChange={(code, workspace) => {
-            if (eval(code) === this.props.solution) {
-              alert('Got it!');
-            }
-          }}
+          onChange={this.getWorkspaceCode}
+          teacher={this.props.teacher}
         >
-
-          <Category name='Variables' custom='VARIABLE' />
-          <Category name='Values'>
-            <Block type='math_number' />
-            <Block type='text' />
-          </Category>
-  
+          <Library />
         </BlocklyDrawer>
       </div>
     );

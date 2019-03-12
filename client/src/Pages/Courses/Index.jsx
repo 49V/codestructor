@@ -8,7 +8,6 @@ import Delete from  './Delete.jsx';
 import Drop from './Drop.jsx';
 import Enroll from  './Enroll.jsx';   
 import Update  from  './Update.jsx';
-import App from '../../App.jsx';
 
 class CoursesIndex extends Component {
 
