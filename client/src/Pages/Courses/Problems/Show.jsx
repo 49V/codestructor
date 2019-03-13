@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { Link } from 'react-router-dom';
 import Workspace from '../../Blockly/Workspace.jsx'
+import StudentSolution from './StudentSolution.jsx'
 import axios from 'axios';
 
 
@@ -37,23 +38,28 @@ class ProblemsShow extends Component {
   }
 
   render() {
+    let solvedPath = this.props.match.url;
+    solvedPath = solvedPath.replace('problems', `${this.props.userID}/solution`)
     return(
       <div>
-        { this.state.complete && <h3> Great job! You got it! </h3> }
-        <Workspace 
-          id={this.props.match.params.id} 
-          path={this.props.match.url} 
-          sendOutput={this.receiveOutput} 
-          teacher={this.props.teacher} 
-          completion={this.state.complete}
-        />
-        { this.props.teacher && 
-          <div> 
-            <Delete teacher={this.props.teacher}/>
-            <Link to={`${this.props.match.url}/edit`} >
-              Edit
-            </Link>
-          </div> }
+        { this.state.complete ?  <Link to={solvedPath} > Congrats you solved it! </Link> : 
+          <div>
+            <Workspace 
+              id={this.props.match.params.id} 
+              path={this.props.match.url} 
+              sendOutput={this.receiveOutput} 
+              teacher={this.props.teacher} 
+              completion={this.state.complete}
+            />
+            { this.props.teacher && 
+              <div> 
+                <Delete teacher={this.props.teacher}/>
+                <Link to={`${this.props.match.url}/edit`} >
+                  Edit
+                </Link>
+              </div> }
+          </div>
+        }
       </div>
     );
   }

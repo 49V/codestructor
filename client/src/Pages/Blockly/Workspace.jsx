@@ -11,7 +11,8 @@ class Workspace extends Component {
       problem: {},
       path: props.path,
       teacher: props.teacher,
-      workspaceXML: [props.workspaceXML || '']
+      workspaceXML: props.workspaceXML,
+      view: props.override || 'working'
     }
   }
 
@@ -30,7 +31,7 @@ class Workspace extends Component {
     if(this.props.sendOutput) {
       let solved = (eval(code) === this.state.problem.solution)
       if (solved && !this.state.teacher && this.state.teacher !== undefined) {
-        axios.post(`http://localhost:3001/admin/v1${this.state.path}`, { solution: workspace })
+        axios.post(`http://localhost:3001/admin/v1${this.state.path}`, { solution: workspace, code: code })
         .catch(error => console.log(error))
       }
       this.props.sendOutput(eval(code), workspace, solved)
@@ -40,6 +41,7 @@ class Workspace extends Component {
 
 
   render() {
+    console.log(this.state.problem.solution)
     return (
       <div>
         <h3>Problem: {this.state.problem.id || 'NEW'}</h3>
@@ -54,7 +56,7 @@ class Workspace extends Component {
           onChange={this.getWorkspaceCode}
           teacher={this.props.teacher}
         >
-          <Library />
+          { this.state.view === 'working' && <Library /> }
         </BlocklyDrawer>
       </div>
     );
