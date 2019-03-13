@@ -7,16 +7,17 @@ import Library from './Library.jsx'
 class Workspace extends Component {
   constructor(props) {
     super(props);
-    console.log(props)
     this.state = {
       problem: {},
       path: props.path,
       teacher: props.teacher,
-      workspaceXML: [props.workspaceXML || '']
+      workspaceXML: props.workspaceXML,
+      view: props.override || 'working'
     }
   }
 
   componentDidMount() {
+    
     if(this.state.path) {
       axios.get(`http://localhost:3001/admin/v1${this.state.path}.json`)
       .then(response => {
@@ -27,24 +28,27 @@ class Workspace extends Component {
   } 
 
   getWorkspaceCode = (code, workspace) => {
+    if(this.props.sendOutput) {
 
-    let solution = eval(code);
+      let solution = eval(code);
 
-    if(typeof solution !== 'string') {
-      solution = solution.toString(10);
+      if(typeof solution !== 'string') {
+        solution = solution.toString(10);
+      }
+
+      let solved = (solution === this.state.problem.solution)
+      if (solved && !this.state.teacher && this.state.teacher !== undefined) {
+        axios.post(`http://localhost:3001/admin/v1${this.state.path}`, { solution: workspace, code: code })
+        .catch(error => console.log(error))
+      }
+      this.props.sendOutput(eval(code), workspace, solved)
     }
-
-    let solved = (solution === this.state.problem.solution)
-    if (solved && !this.state.teacher && this.state.teacher !== undefined) {
-      axios.post(`http://localhost:3001/admin/v1${this.state.path}`, { solution: workspace })
-      .catch(error => console.log(error))
-    }
-    this.props.sendOutput(eval(code), workspace, solved)
   }
 
 
 
   render() {
+    console.log(this.state.problem.solution)
     return (
       <div>
         <h3>Problem: {this.state.problem.id || 'NEW'}</h3>
@@ -59,7 +63,7 @@ class Workspace extends Component {
           onChange={this.getWorkspaceCode}
           teacher={this.props.teacher}
         >
-          <Library />
+          { this.state.view === 'working' && <Library /> }
         </BlocklyDrawer>
       </div>
     );
