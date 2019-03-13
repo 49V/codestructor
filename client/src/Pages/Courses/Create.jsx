@@ -3,8 +3,6 @@ import axios from 'axios';
 
 class CoursesCreate extends Component {
 
-  //TODO: INSERT AXIOS REQUEST IN ORDER TO POST NEW ENTRY
-
   handleSubmit = (event) => {
     event.preventDefault();
     const {name, description} = event.target.elements;
@@ -30,7 +28,6 @@ class CoursesCreate extends Component {
   render() {
     return(
       <div className="create">
-        {/* { this.props.teacher ? <h1> Teachers Courses Create Interface </h1> : <h1> Hey! How'd you get here? This page is only for teachers. </h1> } */}
           <h1>Create a Course</h1>
           <form onSubmit={this.handleSubmit}>
             Name

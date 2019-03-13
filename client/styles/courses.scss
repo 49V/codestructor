@@ -109,6 +109,11 @@
 
   background-color: rgba(247, 239, 239, 0.25);
 
+  .button {
+    font-family: 'Raleway', sans-serif;
+    text-align: center;
+  }
+
   h1 {
     color: $DARK_GREY;
     font-family: 'Raleway', sans-serif;
@@ -131,5 +136,5 @@
 
     }
   }
-  
+
 }

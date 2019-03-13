@@ -11,7 +11,7 @@ import ProblemsNew    from  './Pages/Courses/Problems/Create.jsx';
 import ProblemsShow   from  './Pages/Courses/Problems/Show.jsx';
 import ProblemsUpdate from  './Pages/Courses/Problems/Update.jsx';
 
-const defaultUserID = 3;
+const defaultUserID = 2;
 axios.defaults.headers.common['UserID'] = defaultUserID;
 
 // import route Components here
@@ -80,7 +80,7 @@ class App extends Component {
           </span>
           
           <span className="session">
-            Sign Out
+            <p className="field">Sign Out</p>
           </span>
         </div>
         

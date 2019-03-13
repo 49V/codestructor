@@ -1,5 +1,16 @@
 @import 'colors';
 
+.complete {
+  background-color: rgba(12, 140, 48, 0.75);
+  border-radius: 5px;
+  border: 1px solid #cbcbcb;
+  color: white;
+  font-family: 'Raleway', sans-serif;
+  font-size: 20px;
+  padding: 20px 0px;
+  text-align: center;
+}
+
 .solver {
   margin-top: 0px;
   padding-top: 0px;
@@ -9,14 +20,6 @@
   .button {
     font-family: 'Raleway', sans-serif;
     text-align: center;
-  }
-
-  .complete {
-    background-color: rgba(12, 140, 48, 0.75);
-    border-radius: 5px;
-    border: 1px solid #cbcbcb;
-    color: white;
-    padding: 20px 0px;
   }
 
   .edit {

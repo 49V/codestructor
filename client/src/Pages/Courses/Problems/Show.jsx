@@ -3,10 +3,6 @@ import { Link } from 'react-router-dom';
 import Workspace from '../../Blockly/Workspace.jsx'
 import axios from 'axios';
 
-
-import Delete from  './Delete.jsx';
-import { Cookies } from 'react-cookie';
-
 class ProblemsShow extends Component {
 
   constructor(props) {

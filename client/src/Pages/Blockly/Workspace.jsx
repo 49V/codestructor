@@ -7,7 +7,6 @@ import Library from './Library.jsx'
 class Workspace extends Component {
   constructor(props) {
     super(props);
-    console.log(props)
     this.state = {
       problem: {},
       path: props.path,
@@ -49,7 +48,6 @@ class Workspace extends Component {
       <React.Fragment>
 
         <div className="problem">  
-          <h1> Problem </h1> 
           <div className="header">
             <h3>
               {this.state.problem.description}
