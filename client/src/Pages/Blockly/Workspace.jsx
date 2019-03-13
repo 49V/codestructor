@@ -16,7 +16,7 @@ class Workspace extends Component {
   }
 
   componentDidMount() {
-    console.log(this.state.path)
+    
     if(this.state.path) {
       axios.get(`http://localhost:3001/admin/v1${this.state.path}.json`)
       .then(response => {
@@ -27,12 +27,14 @@ class Workspace extends Component {
   } 
 
   getWorkspaceCode = (code, workspace) => {
-    let solved = (eval(code) === this.state.problem.solution)
-    if (solved && !this.state.teacher && this.state.teacher !== undefined) {
-      axios.post(`http://localhost:3001/admin/v1${this.state.path}`, { solution: workspace })
-      .catch(error => console.log(error))
+    if(this.props.sendOutput) {
+      let solved = (eval(code) === this.state.problem.solution)
+      if (solved && !this.state.teacher && this.state.teacher !== undefined) {
+        axios.post(`http://localhost:3001/admin/v1${this.state.path}`, { solution: workspace })
+        .catch(error => console.log(error))
+      }
+      this.props.sendOutput(eval(code), workspace, solved)
     }
-    this.props.sendOutput(eval(code), workspace, solved)
   }
 
 

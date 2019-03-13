@@ -20,7 +20,6 @@ class StudentProblems extends Component {
 
   render() {
     if(this.state.problems) {
-      console.log(this.state.problems)
       let problemLinks = this.state.problems.map( (problem) => {
         return (  <li> <Link to={`${this.props.match.url}/solution/${problem.id}`} > Problem: {problem.id} </Link> </li>  )
       })

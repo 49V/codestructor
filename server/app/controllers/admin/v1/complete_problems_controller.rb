@@ -9,7 +9,7 @@ class Admin::V1::CompleteProblemsController < ApplicationController
         # TO DO!!!!!!!
       end
     end
-    CourseProgress.new(progress_params) unless has_progress?
+    CourseProgress.create!(progress_params) unless has_progress?
   end
 
   def has_progress?
