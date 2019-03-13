@@ -23,6 +23,7 @@ class CoursesShow extends Component {
     const problemsRequest = await axios.get(`http://localhost:3001/admin/v1/courses/${this.props.match.params.id}/problems`);
     const studentsRequest = await axios.get(`http://localhost:3001/admin/v1/courses/${this.props.match.params.id}/enrolled`);
   
+    // BAD SOLUTION BELOW - should return completion data for all problems in one request
     if(!this.props.teacher) {
       for(const problem of problemsRequest.data) {
         let complete = await axios.get(`http://localhost:3001/admin/v1/courses/${coursesRequest.data.id}/problems/${problem.id}/status`);
@@ -92,8 +93,8 @@ class CoursesShow extends Component {
         </div>
       );
     });
-    let studentEmails = this.state.students ? this.state.students.map( (student)=> {
-      return (<li> {student.email} </li>)
+    let studentSolutions = this.state.students ? this.state.students.map( (student)=> {
+      return ( <li> <Link to={ `${this.props.match.url}/${student.id}` } > {student.email} </Link> </li> )
     }) : null;
     return(
       <React.Fragment>
@@ -106,7 +107,7 @@ class CoursesShow extends Component {
           </div>
           { this.props.teacher && this.state.students &&
             <ul> Enrolled Students
-              {studentEmails}
+              {studentSolutions}
              </ul> }
         </div>
         <br />

@@ -7,7 +7,6 @@ import Library from './Library.jsx'
 class Workspace extends Component {
   constructor(props) {
     super(props);
-    console.log(props)
     this.state = {
       problem: {},
       path: props.path,
@@ -17,6 +16,7 @@ class Workspace extends Component {
   }
 
   componentDidMount() {
+    console.log(this.state.path)
     if(this.state.path) {
       axios.get(`http://localhost:3001/admin/v1${this.state.path}.json`)
       .then(response => {
