@@ -10,8 +10,6 @@ import CoursesUpdate  from  './Pages/Courses/Update.jsx'
 import ProblemsNew    from  './Pages/Courses/Problems/Create.jsx';
 import ProblemsShow   from  './Pages/Courses/Problems/Show.jsx';
 import ProblemsUpdate from  './Pages/Courses/Problems/Update.jsx';
-import StudentProblems from './Pages/Courses/Problems/StudentProblems.jsx'
-import StudentSolution from './Pages/Courses/Problems/StudentSolution.jsx'
 
 const defaultUserID = 2;
 axios.defaults.headers.common['UserID'] = defaultUserID;
@@ -61,7 +59,7 @@ class App extends Component {
         <button className='devHelper' onClick={ () => { 
             this.props.cookies.set('id', this.state.user.id === 2 ? 3 : 2);
             axios.defaults.headers.common['UserID'] = this.props.cookies.get('id'); // for all requests
-           this.componentDidMount();
+            this.componentDidMount();
             }
           }> Logged in as: {(this.state.user.teacher ? 'Teacher' : 'Student')} 
         </button>
@@ -76,8 +74,6 @@ class App extends Component {
           <Route path="/courses/:id/problems/new" exact render={ (props) => <ProblemsNew {...props} teacher={this.state.user.teacher} /> } /> 
           <Route path="/courses/:id/problems/:id" exact render={ (props) => <ProblemsShow {...props} teacher={this.state.user.teacher} /> } />
           <Route path="/courses/:id/problems/:id/edit" exact render={ (props) => <ProblemsUpdate {...props} teacher={this.state.user.teacher} /> } />
-          <Route path="/courses/:id/:student_id" exact component={StudentProblems} />
-          <Route path="/courses/:id/:student_id/solution/:problem_id" exact component={StudentSolution} />           
           <Route render={() => {return <h1>You just 404'd</h1>}} />
         </Switch>
       </div>
