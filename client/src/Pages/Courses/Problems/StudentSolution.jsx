@@ -12,22 +12,29 @@ class StudentSolution extends Component {
       courseId: props.match.params.id,
       problemId: props.match.params.problem_id,
       studentId: props.match.params.student_id,
-      workspaceXML: ''
+      workspaceXML: 'getting'
     }
   }
 
   async componentDidMount() {
     //GET STUDENT'S SOLUTION XML (AND FIND OUT IF THEY HAVE SOLVED IT)
     const solutionRequest = await axios.get(`http://localhost:3001/admin/v1/${this.props.match.url}`);
-    this.setState({ workspaceXML: solutionRequest.data[0]["solution"] })
+    if (solutionRequest.data[0]) {
+      this.setState({ workspaceXML: solutionRequest.data[0]["solution"] })
+    } else {
+      this.setState({ workspaceXML: 'incomplete' })
+    }
   }
 
   render() {
-    if(this.state.workspaceXML) {
-      let path = `/courses/${this.state.courseId}/problems/${this.state.problemId}`;
-      return (<Workspace teacher={true} workspaceXML={this.state.workspaceXML} path={path}/>)
-    } else {
-      return null
+    switch(this.state.workspaceXML) {
+      case 'getting':
+        return (<div> Searching for solution... </div>)
+      case 'incomplete':
+        return (<div> Student has not completed this problem yet! </div>)
+      default:
+        let path = `/courses/${this.state.courseId}/problems/${this.state.problemId}`;
+        return (<Workspace teacher={true} workspaceXML={this.state.workspaceXML} path={path}/>)
     }
   }
 }
