@@ -10,6 +10,7 @@ Rails.application.routes.draw do
         resources :problems
         post 'problems/:id', to: 'complete_problems#create'
         get 'problems/:id/status', to: 'complete_problems#status'
+        get ':user_id/solution/:problem_id', to: 'course_progresses#show'
       end
     end
   end

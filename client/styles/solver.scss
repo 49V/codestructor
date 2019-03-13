@@ -4,22 +4,36 @@
   background-color: rgba(12, 140, 48, 0.75);
   border-radius: 5px;
   border: 1px solid #cbcbcb;
-  color: white;
-  font-family: 'Raleway', sans-serif;
-  font-size: 20px;
-  padding: 20px 0px;
-  text-align: center;
+  
+
+  h3 {
+    color: white;
+    font-family: 'Raleway', sans-serif;
+    font-size: 20px;
+    margin-bottom: 1px;
+    padding: 5px 0px;
+    text-align: center;
+  }
+
+  .solution {
+    margin-bottom: 15px;
+  }
+
 }
 
 .solver {
   margin-top: 0px;
   padding-top: 0px;
-  background-color: rgba(0,0,0,0.15); 
+  background-color: rgba(0, 0,0,0.15); 
      
 
   .button {
     font-family: 'Raleway', sans-serif;
     text-align: center;
+  }
+
+  .code {
+    background-color: rgba(0,0,0,0.55); 
   }
 
   .edit {
@@ -54,6 +68,18 @@
       margin-bottom: 50px;
       margin-left: 30px;
     }
+  }
+
+  .solution {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 15px;
+    text-align: center;
+    
+  }
+
+  .workspace {
+    width: 75%;
+    margin: 25px 10%;
   }
 
 }

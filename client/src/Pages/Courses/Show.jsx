@@ -23,6 +23,7 @@ class CoursesShow extends Component {
     const problemsRequest = await axios.get(`http://localhost:3001/admin/v1/courses/${this.props.match.params.id}/problems`);
     const studentsRequest = await axios.get(`http://localhost:3001/admin/v1/courses/${this.props.match.params.id}/enrolled`);
   
+    // BAD SOLUTION BELOW - should return completion data for all problems in one request
     if(!this.props.teacher) {
       for(const problem of problemsRequest.data) {
         let complete = await axios.get(`http://localhost:3001/admin/v1/courses/${coursesRequest.data.id}/problems/${problem.id}/status`);
@@ -79,6 +80,15 @@ class CoursesShow extends Component {
                 </Link>
               </React.Fragment>
             }
+            {/* We only display the problem completion status if they are student */}
+            { problem.complete  &&
+              <span className="checkbox">
+                <span className="message">
+                  Problem Completed
+                </span>
+                <i className="far fa-check-square"></i>
+                </span>
+            }
           </span>
 
           <Link to={`${this.props.match.url}/problems/${problem.id}`} style={{ textDecoration: 'none' }}>
@@ -98,9 +108,17 @@ class CoursesShow extends Component {
         </div>
       );
     });
-    let studentEmails = this.state.students ? this.state.students.map( (student)=> {
-      return (<li> {student.email} </li>)
+
+    let studentSolutions = this.state.students ? this.state.students.map( (student)=> {
+      return ( 
+        <div className="students">
+          <Link to={ `${this.props.match.url}/${student.id}` } > 
+            {student.email} 
+          </Link> 
+        </div>
+      )
     }) : null;
+
     return(
       <React.Fragment>
         <div className="courses">
@@ -113,9 +131,11 @@ class CoursesShow extends Component {
             </div>
           </div>
           { this.props.teacher && this.state.students &&
-            <ul> Enrolled Students
-              {studentEmails}
-             </ul> }
+            <React.Fragment>
+            <h2> Enrolled Students</h2>
+              {studentSolutions}
+            </React.Fragment>
+              }
         </div>
 
         <div className="problems">

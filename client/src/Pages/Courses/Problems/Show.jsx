@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { Link } from 'react-router-dom';
 import Workspace from '../../Blockly/Workspace.jsx'
+import StudentSolution from './StudentSolution.jsx'
 import axios from 'axios';
 
 class ProblemsShow extends Component {
@@ -34,9 +35,24 @@ class ProblemsShow extends Component {
   }
 
   render() {
+    let solvedPath = this.props.match.url;
+    solvedPath = solvedPath.replace('problems', `${this.props.userID}/solution`)
     return(
       <div className="solver">
-        { this.state.complete && <h3 className="complete"> Great job! You got it! </h3> }
+        { this.state.complete && 
+        <React.Fragment>
+          <div className="complete"> 
+            <h3>
+              Great job! You got it!
+            </h3> 
+            <div className="solution"> 
+              <Link to={solvedPath} style={{ textDecoration: 'none' }}>
+                  View your solution here
+              </Link>
+            </div>
+          </div>
+        </React.Fragment>
+        }
 
           <Workspace 
             id={this.props.match.params.id} 

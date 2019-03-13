@@ -15,6 +15,25 @@
     font-style: normal;
   }
 
+  h2 {
+    color: $DARK_GREY;
+    font-family: 'Raleway', sans-serif;
+    font-size: 30px;
+    font-weight: 200;
+    font-style: normal;
+    // margin-left: 30px;
+  }
+
+  .students {
+    color: $DARK_GREY;
+    font-family: 'Raleway', sans-serif;
+    font-size: 20px;
+    font-weight: 200;
+    font-style: normal;
+    margin-left: 30px;
+    margin-bottom: 10px;
+  }
+
   %courses {
 
     .item {
