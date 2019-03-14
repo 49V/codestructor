@@ -81,7 +81,7 @@ class Workspace extends Component {
           >
             { this.state.view === 'working' && <Library /> }          
           </BlocklyDrawer>
-          <button className={""} onClick={this.getWorkspaceCode}> Test! </button>
+          <button onClick={this.getWorkspaceCode}> Test! </button>
         </div>
 
       </React.Fragment>
