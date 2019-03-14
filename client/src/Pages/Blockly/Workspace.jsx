@@ -54,13 +54,17 @@ class Workspace extends Component {
 
         <div className="problem">  
           <div className="header">
-            <h3>
-              {this.state.problem.description}
-            </h3>
+              <span className="title">
+                <h3>
+                  {this.state.problem.description}
+                </h3>
+              </span>
           </div>
 
           <div className="body">
-            {this.state.problem.statement}
+            <span className="description">
+              {this.state.problem.statement}
+            </span>
           </div>
 
         </div>

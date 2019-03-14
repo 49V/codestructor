@@ -9,7 +9,7 @@
   .fas.fa-plus-circle {
     color: $GREEN;
     font-size: 50px;
-    margin-right: 50%;
+    margin-right: 25%;
     margin-left: 25%;
     opacity: 0.8;
 
@@ -32,15 +32,18 @@
 
   .item {
 
+  
     background-color: rgba(0,0,0,0.25);
     border-radius: 5px;
     border: 1px solid #cbcbcb;
     opacity: 0.85;
     padding-left: 15px;
     padding-top: 5px;
-    margin-right: 50%;
-    margin-left: 60px;
+    margin-right: 25%;
+    margin-left: 25%;
     margin-bottom: 30px;
+
+    text-align: left;
 
     &:hover {
       border-color: #a7a4a4;
@@ -100,10 +103,6 @@
       }
     }
 
-  }
-
-  #title {
-    margin-left: 30px;
   }
 
 }

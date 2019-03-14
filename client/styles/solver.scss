@@ -1,85 +1,114 @@
 @import 'colors';
 
-.complete {
-  background-color: rgba(12, 140, 48, 0.75);
-  border-radius: 5px;
-  border: 1px solid #cbcbcb;
-  
+#react-root{
 
-  h3 {
-    color: white;
-    font-family: 'Raleway', sans-serif;
-    font-size: 20px;
-    margin-bottom: 1px;
-    padding: 5px 0px;
-    text-align: center;
-  }
+  .complete {
+    background-color: rgba(12, 140, 48, 0.75);
+    border-radius: 5px;
+    border: 1px solid #cbcbcb;
+    
 
-  .solution {
-    margin-bottom: 15px;
-  }
-
-}
-
-.solver {
-  margin-top: 0px;
-  padding-top: 0px;
-  background-color: rgba(0, 0,0,0.15); 
-     
-
-  .button {
-    font-family: 'Raleway', sans-serif;
-    text-align: center;
-  }
-
-  .code {
-    background-color: rgba(0,0,0,0.55); 
-  }
-
-  .edit {
-
-    .link {
-      color: $YELLOW;
-      font-size: 25px;
+    h3 {
+      color: white;
+      font-family: 'Raleway', sans-serif;
+      font-size: 20px;
+      margin-bottom: 1px;
+      padding: 5px 0px;
       text-align: center;
     }
 
+    .solution {
+      margin-bottom: 15px;
+    }
+
   }
 
-  h1 {
-    color: $PURPLE;
-    font-family: 'Raleway', sans-serif;
-    font-weight: 400;
-  }
+  .solver {
+    margin-top: 0px;
+    padding-top: 0px;
+    background-color: rgba(0, 0,0,0.15); 
+      
 
-  .problem {
-
-    h3 {
-      font-size: 25px;
-      color: #545454;
+    .button {
       font-family: 'Raleway', sans-serif;
-      font-weight: 300;
-      margin-left: 30px;
+      text-align: center;
     }
 
-    .body {
-      color: white;
+    .code {
+      background-color: rgba(0,0,0,0.55); 
+    }
+
+    .edit {
+
+      .link {
+        color: $YELLOW;
+        font-size: 25px;
+        text-align: center;
+      }
+
+    }
+
+    h1 {
+      color: $PURPLE;
+      font-family: 'Raleway', sans-serif;
+      font-weight: 400;
+      margin-top: 0px;
+    }
+
+    .problem {
+
+      text-align: left;
+
+      .header {
+        background-color: purple;
+        width: 230px;
+        border-top-right-radius: 5px;
+        padding-left: 30px;
+
+        .title {
+          
+          margin-bottom: 0px;
+
+          h3 {
+            color: white;
+            font-family: 'Raleway', sans-serif;
+            font-size: 25px;
+            font-weight: 300;
+            margin-bottom: 0px;
+          }
+
+        }
+      }
+
+      .body {
+        background-color: rgba(0, 0, 0, 0.30);
+        border-bottom-right-radius: 5px;
+        font-family: 'Montserrat', sans-serif;
+        margin-bottom: 0px;
+        padding-left: 30px;
+        padding-top: 25px;
+        padding-bottom: 25px;
+        width: 230px;
+
+
+        .description {
+          padding-left: 15px;        
+        }
+      }
+    }
+
+    .solution {
       font-family: 'Montserrat', sans-serif;
-      margin-bottom: 50px;
-      margin-left: 30px;
+      font-size: 15px;
+      text-align: center;
+      
     }
-  }
 
-  .solution {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 15px;
-    text-align: center;
-    
-  }
+    .workspace {
+      color: purple;
+      width: 75%;
+      margin: 15px 25px 10% 10%;
+    }
 
-  .workspace {
-    width: 75%;
-    margin: 25px 10%;
   }
-
 }

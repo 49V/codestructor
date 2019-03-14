@@ -52,9 +52,6 @@ class ProblemsCreate extends Component {
       }
     } else { 
       alert('Your problem must be solvable! Try putting the output variable at the very bottom.')
-      this.setState({
-        complete: false
-      });
     }
   }
 
@@ -74,11 +71,15 @@ class ProblemsCreate extends Component {
           <React.Fragment>
             <h1>Create a Problem</h1>
             <form onSubmit={this.handleSubmit}>
-                Name:
+            <div className="title">
+              Name:
+            </div>
               <div>
                 <input id="probDescription" name="description" type="text" placeholder="Problem Description" required /> 
               </div>  
+              <div className="title">
                 Description:
+              </div>
               <div>
                 <input id="probStatement" name="statement" type="text" placeholder="Problem Description" />
               </div>

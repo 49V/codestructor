@@ -111,11 +111,11 @@ class CoursesShow extends Component {
 
     let studentSolutions = this.state.students ? this.state.students.map( (student)=> {
       return ( 
-        <div className="students">
-          <Link to={ `${this.props.match.url}/${student.id}` } > 
-            {student.email} 
-          </Link> 
-        </div>
+          <li>
+            <Link to={ `${this.props.match.url}/${student.id}` } > 
+              {student.email} 
+            </Link>
+          </li> 
       )
     }) : null;
 
@@ -132,8 +132,10 @@ class CoursesShow extends Component {
           </div>
           { this.props.teacher && this.state.students &&
             <React.Fragment>
-            <h2> Enrolled Students</h2>
+            <h2> Enrolled Students</h2>            
+            <ul className="students">
               {studentSolutions}
+            </ul>
             </React.Fragment>
               }
         </div>

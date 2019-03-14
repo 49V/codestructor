@@ -1,159 +1,177 @@
 @import 'colors';
 
-.courses {
+#react-root {
+  text-align: center;  
 
-  background-color: rgba(0,0,0,0.15);
-  // background-color: rgba(247, 239, 239, 0.25);
 
-  color: white;
+  .courses {
 
-  h1 {
-    color: $DARK_GREY;
-    font-family: 'Raleway', sans-serif;
-    font-size: 40px;
-    font-weight: 400;
-    font-style: normal;
-  }
+    background-color: rgba(0, 0, 0, 0.149);
 
-  h2 {
-    color: $DARK_GREY;
-    font-family: 'Raleway', sans-serif;
-    font-size: 30px;
-    font-weight: 200;
-    font-style: normal;
-    // margin-left: 30px;
-  }
+    color: white;
 
-  .students {
-    color: $DARK_GREY;
-    font-family: 'Raleway', sans-serif;
-    font-size: 20px;
-    font-weight: 200;
-    font-style: normal;
-    margin-left: 30px;
-    margin-bottom: 10px;
-  }
+    h1 {
+      color: $DARK_GREY;
+      font-family: 'Raleway', sans-serif;
+      font-size: 40px;
+      font-weight: 400;
+      font-style: normal;
+    }
 
-  %courses {
+    h2 {
+      color: $DARK_GREY;
+      font-family: 'Raleway', sans-serif;
+      font-size: 30px;
+      font-weight: 200;
+      font-style: normal;
+      margin-bottom: 0px;
+    }
 
-    .item {
+    .students {
+      color: $DARK_GREY;
+      font-family: 'Raleway', sans-serif;
+      font-size: 20px;
+      font-weight: 200;
+      font-style: normal;
+      margin: 10px 0px;
+    }
 
-      background-color: rgba(0,0,0,0.25);
+    %courses {
 
-      border-radius: 5px;
-      border: 1px solid #cbcbcb;
-      opacity: 0.85;
-      padding-left: 15px;
-      padding-top: 5px;
-      margin-right: 50%;
-      margin-left: 60px;
-      margin-bottom: 30px;
+      .item {
 
-      &:hover {
-        border-color: #a7a4a4;
-        opacity: 1;
-      }
+        background-color: rgba(0,0,0,0.25);
+        border-radius: 5px;
+        border: 1px solid #cbcbcb;
+        opacity: 0.85;
+        padding-left: 15px;
+        padding-top: 5px;
+        margin-right: 25%;
+        margin-left: 25%;
+        margin-bottom: 30px;
+        text-align: left; 
 
-      h2 {
-        color: $PURPLE;
-        font-family: 'Raleway', sans-serif;
-        font-weight: 200;
-      }
+        &:hover {
+          border-color: #a7a4a4;
+          opacity: 1;
+        }
 
-      .body {
-        color: white;
-        font-family: 'Montserrat', sans-serif;
-        margin-bottom: 20px;
-      }
+        h2 {
+          color: $PURPLE;
+          font-family: 'Raleway', sans-serif;
+          font-weight: 200;
+        }
 
-      .footer {
-        float: right;
-        margin-right:10px;
+        .body {
+          color: white;
+          font-family: 'Montserrat', sans-serif;
+          margin-bottom: 20px;
+        }
 
-        .far.fa-trash-alt {
-          color: $RED;
-          font-size: 20px;
+        .footer {
+          float: right;
+          margin-right:10px;
+
+          .far.fa-trash-alt {
+            color: $RED;
+            font-size: 20px;
+            opacity: 0.6;
+
+              &:hover {
+                opacity: 1;
+              }
+          }
+        }
+
+        .footer.drop {
+          float: right;
+          font-size: 25px;
+          margin-right:10px;
           opacity: 0.6;
 
-            &:hover {
-              opacity: 1;
-            }
+          &:hover {
+            opacity: 1;
+          }
+          
+          a {
+            color: $RED;
+          }
+        }
+
+        .footer.enroll {
+          float: right;
+          font-size: 25px;
+          margin-right:10px;
+          opacity: 0.6;
+
+          &:hover {
+            opacity: 1;
+          }
+          
+          a {
+            color: $GREEN;
+          }
+        }
+
+      }
+
+    }
+
+    .owned {
+      @extend %courses;
+    }
+
+    .unowned {
+      @extend %courses;
+    }
+  }
+
+  .create {
+
+    .button {
+      font-family: 'Raleway', sans-serif;
+      text-align: center;
+    }
+
+    .complete {
+      background-color: rgba(12, 140, 48, 0.75);
+      border-radius: 5px;
+      border: 1px solid #cbcbcb;
+      color: white;
+      font-size: 20px;
+      padding: 20px 0;
+      text-align: center;
+    }
+
+    h1 {
+      color: $DARK_GREY;
+      font-family: 'Raleway', sans-serif;
+      font-size: 40px;
+      font-weight: 400;
+      font-style: normal;
+    }
+
+    form {
+      font-family: 'Raleway', sans-serif;
+      font-size: 20px;      
+
+      input {
+        text-align: left;
+      }
+      
+      .line {
+        margin-bottom: 25px;
+
+        .submitButton{
+
         }
       }
 
-      .footer.drop {
-        float: right;
-        font-size: 25px;
-        margin-right:10px;
-        opacity: 0.6;
-
-        &:hover {
-          opacity: 1;
-        }
-        
-        a {
-          color: $RED;
-        }
-      }
-
-      .footer.enroll {
-        float: right;
-        font-size: 25px;
-        margin-right:10px;
-        opacity: 0.6;
-
-        &:hover {
-          opacity: 1;
-        }
-        
-        a {
-          color: $GREEN;
-        }
+      .title {
+        color: white;
       }
 
     }
 
   }
-
-  .owned {
-    @extend %courses;
-  }
-
-  .unowned {
-    @extend %courses;
-  }
-}
-
-.create {
-
-  background-color: rgba(247, 239, 239, 0.25);
-
-  .button {
-    font-family: 'Raleway', sans-serif;
-    text-align: center;
-  }
-
-  h1 {
-    color: $DARK_GREY;
-    font-family: 'Raleway', sans-serif;
-    font-size: 40px;
-    font-weight: 400;
-    font-style: normal;
-  }
-
-  form {
-    font-family: 'Raleway', sans-serif;
-    font-size: 20px;
-    margin-left: 60px;
-
-    .line {
-      margin-bottom: 25px;
-
-      .submitButton{
-
-      }
-
-    }
-  }
-
 }

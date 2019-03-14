@@ -70,8 +70,6 @@ class ProblemsShow extends Component {
             </div>
             </Link>
           </div> }
-
-          
       </div>
     );
   }
