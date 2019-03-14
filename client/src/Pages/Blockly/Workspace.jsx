@@ -37,7 +37,7 @@ class Workspace extends Component {
       }
 
       let solved = (solution === this.state.problem.solution)
-      if (solved && !this.state.teacher && this.state.teacher !== undefined) {
+      if (!this.state.completed && solved && !this.state.teacher && this.state.teacher !== undefined) {
         axios.post(`http://localhost:3001/admin/v1${this.state.path}`, { solution: workspace, code: code })
         .catch(error => console.log(error))
       }
@@ -48,7 +48,6 @@ class Workspace extends Component {
 
 
   render() {
-    console.log("Workspace");
     return (
       <React.Fragment>
 
@@ -68,6 +67,16 @@ class Workspace extends Component {
           </div>
 
         </div>
+
+        { this.props.override === 'review' && this.props.completion && 
+          <React.Fragment>
+            <h1> Code output (JavaScript): </h1>  
+            <pre className="prettyprint"> 
+              {this.props.solutionCode} 
+            </pre>
+          </React.Fragment>
+        }
+        
 
         <div className="workspace">
           <h1>
