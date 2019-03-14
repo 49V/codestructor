@@ -48,7 +48,7 @@ class Workspace extends Component {
 
 
   render() {
-    console.log(this.state.problem.solution)
+    console.log("Workspace");
     return (
       <React.Fragment>
 

@@ -20,7 +20,6 @@ class StudentSolution extends Component {
   async componentDidMount() {
     //GET STUDENT'S SOLUTION XML (AND FIND OUT IF THEY HAVE SOLVED IT)
     const solutionRequest = await axios.get(`http://localhost:3001/admin/v1/${this.props.match.url}`);
-    console.log("SOLUTION REQUEST: ", solutionRequest);
     if (solutionRequest.data[0]) {
       this.setState({ workspaceXML: solutionRequest.data[0]["solution"], solutionCode: solutionRequest.data[0]["code"] })
     } else {

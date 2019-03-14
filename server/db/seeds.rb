@@ -17,21 +17,21 @@ teacher1 = User.create!({
   teacher: true
 })
 
-course1 = Course.create!({
-  name: 'course1', 
-  description: 'an intro course', 
-  teacher_id: teacher1.id
-})
-
 teacher2 = User.create!({
   email: 'teach2@er.teacher',
   password: '12345',
   teacher: true
 })
 
+course1 = Course.create!({
+  name: 'Coding 101', 
+  description: 'An introductory course on the basic computational thinking required in order to properly develop basic software.', 
+  teacher_id: teacher2.id
+})
+
 course2 = Course.create!({
-  name: 'course2', 
-  description: 'an intro course', 
+  name: 'Data Structures and Algorithms', 
+  description: 'An introduction to fundamental data structures', 
   teacher_id: teacher2.id
 })
 
@@ -48,23 +48,23 @@ student2 = User.create!({
 })
 
 problem1 = Problem.create!({
-  statement: 'A basic problem.',
-  description: 'not too difficult',
-  solution: '0',
+  statement: 'Starting from 0, add 1 until you reach 10',
+  description: 'A basic loop',
+  solution: '10',
   course_id: course1.id 
 })
 
 problem2 = Problem.create!({
-  statement: 'A basic problem.',
-  description: 'not too difficult',
-  solution: '0',
+  statement: 'Starting from 0,add 1 on every odd iteration',
+  description: 'A complex loop',
+  solution: '5',
   course_id: course1.id 
 })
 
-problem3 = Problem.create!({
-  statement: 'A basic problem.',
-  description: 'not too difficult',
-  solution: '0',
+problem3 = Problem.create!({ 
+  statement: 'Reliably guess a number between 1 and 1000',
+  description: 'Binary Search',
+  solution: '24',
   course_id: course2.id 
 })
 

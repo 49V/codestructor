@@ -6,7 +6,7 @@ pre {
   padding-left: 30px;
 }
 
-pre.prettyprint { display: block; background-color: rgba(0,0,0,0.55) }
+pre.prettyprint { display: block; background-color: rgba(0,0,0,0.55); text-align: left }
 pre .nocode { background-color: none; color: red }
 pre .str { color: #ffa0a0 } /* string  - pink */
 pre .kwd { color: #f0e68c; font-weight: bold }

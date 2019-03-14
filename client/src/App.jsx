@@ -13,7 +13,7 @@ import ProblemsUpdate from  './Pages/Courses/Problems/Update.jsx';
 import StudentProblems from './Pages/Courses/Problems/StudentProblems.jsx'
 import StudentSolution from './Pages/Courses/Problems/StudentSolution.jsx'
 
-const defaultUserID = 4;
+const defaultUserID = 2;
 axios.defaults.headers.common['UserID'] = defaultUserID;
 
 // import route Components here
@@ -70,6 +70,17 @@ class App extends Component {
     .catch(error => console.log(error))
   } 
 
+  /*
+  * Changes user between student / teacher by updating UserID header
+  *
+  */
+  changeUser = (event) => { 
+    event.preventDefault();
+    this.props.cookies.set('id', this.state.user.id === 2 ? 3 : 2);
+    axios.defaults.headers.common['UserID'] = this.props.cookies.get('id'); // for all requests
+    this.componentDidMount();
+    }
+
   render() {
     return (
       <React.Fragment>
@@ -82,17 +93,9 @@ class App extends Component {
           </span>
           
           <span className="session">
-            <p className="field">Sign Out</p>
+            <a href="" className="field" onClick={ this.changeUser }>{(this.state.user.teacher ? 'Teacher' : 'Student')}</a>
           </span>
         </div>
-        
-        {/* <button className='devHelper' onClick={ () => { 
-            this.props.cookies.set('id', this.state.user.id === 2 ? 3 : 2);
-            axios.defaults.headers.common['UserID'] = this.props.cookies.get('id'); // for all requests
-           this.componentDidMount();
-            }
-          }> Logged in as: {(this.state.user.teacher ? 'Teacher' : 'Student')} 
-        </button> */}
 
         {/* All of our routes are defined here */}
         <Switch>
