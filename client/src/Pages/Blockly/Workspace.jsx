@@ -12,7 +12,8 @@ class Workspace extends Component {
       path: props.path,
       teacher: props.teacher,
       workspaceXML: props.workspaceXML,
-      view: props.override || 'working'
+      view: props.override || 'working',
+      complete: false
     }
   }
 
@@ -37,9 +38,10 @@ class Workspace extends Component {
       }
 
       let solved = (solution === this.state.problem.solution)
-      if (solved && !this.state.teacher && this.state.teacher !== undefined) {
+      if (!this.state.complete && solved && !this.state.teacher && this.state.teacher !== undefined) {
         axios.post(`http://localhost:3001/admin/v1${this.state.path}`, { solution: workspace, code: code })
         .catch(error => console.log(error))
+        this.setState({ complete: true })
       }
       this.props.sendOutput(eval(code), workspace, solved)
     }
