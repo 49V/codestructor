@@ -60,6 +60,7 @@ class ProblemsShow extends Component {
             sendOutput={this.receiveOutput} 
             teacher={this.props.teacher} 
             completion={this.state.complete}
+            workspaceXML={ this.state.complete ? this.problemXml : '' }
           />
 
           { this.props.teacher && 
