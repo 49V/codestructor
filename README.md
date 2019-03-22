@@ -1,12 +1,13 @@
 # README - Codestructor 
 
 ## Screenshots
-!["Welcome to Codestructor:"]()
+!["Welcome to Codestructor:"](https://github.com/giffin94/codestructor/blob/master/client/public/Screenshot%20from%202019-03-21%2017-00-57.jpg?raw=true)
 
-!["Student Courses:"]()
-!["Course Problems:"]()
-!["Solution with Code:"]()
+!["Student Courses:"](https://github.com/giffin94/codestructor/blob/master/client/public/Screenshot%20from%202019-03-21%2019-35-39.jpg?raw=true)
 
+!["Course Problems:"](https://github.com/giffin94/codestructor/blob/master/client/public/Screenshot%20from%202019-03-21%2019-35-56.jpg?raw=true)
+
+!["Solution with Code:"](https://github.com/giffin94/codestructor/blob/master/client/public/Screenshot%20from%202019-03-21%2019-37-20.jpg?raw=true)
 
 ## Setup
 
