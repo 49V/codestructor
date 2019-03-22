@@ -26,7 +26,12 @@
 
 ## Dependencies
 
-* Rails 4.2 [Rails Guide](http://guides.rubyonrails.org/v4.2/)
-* PostgreSQL 9.x
-* Stripe
+* axios 0.17.1
+* Node-Blockly 1.0.35
+* Node-Sass 4.11.0
+* ReactJS 16.5.2
+* Regenerator Runtime
 
+* Rails 5.1.6
+* PostgreSQL 0.18
+* rack-cors 
