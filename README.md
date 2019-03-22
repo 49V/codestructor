@@ -1,9 +1,12 @@
 # README - Codestructor 
 
 ## Screenshots
-!["Welcome to the Jungle:"]()
+!["Welcome to Codestructor:"]()
 
-!["Product Details:"]()
+!["Student Courses:"]()
+!["Course Problems:"]()
+!["Solution with Code:"]()
+
 
 ## Setup
 
