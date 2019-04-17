@@ -1,5 +1,7 @@
 # README - Codestructor 
 
+Codestructor is Single-Page Web Application that is built using React and HTML/CSS on the front-end, with a Ruby on Rails API on the back-end. Codestructor aims to teach computational thinking to those without a traditional software background.
+
 ## Screenshots
 !["Welcome to Codestructor:"](https://github.com/giffin94/codestructor/blob/master/client/public/Screenshot%20from%202019-03-21%2017-00-57.jpg?raw=true)
 
